@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<products>
+    <product>
+        <id>69</id>
+        <name>Nutella</name>
+        <manufacturer>Ferrero</manufacturer>
+        <price>800</price>
+    </product>
+    <product>
+        <id>12</id>
+        <name>Nutella</name>
+        <manufacturer>Ferrero</manufacturer>
+        <price>800</price>
+    </product>
+    <product>
+        <id>55</id>
+        <name>Nutella</name>
+        <manufacturer>Ferrero</manufacturer>
+        <price>800</price>
+    </product>
+        <product>
+        <id>69</id>
+        <name>Nutella</name>
+        <manufacturer>Ferrero</manufacturer>
+        <price>800</price>
+    </product>
+    <product>
+        <id>55</id>
+        <name>Nutella hjdv</name>
+        <manufacturer>Ferrero</manufacturer>
+        <price>800</price>
+    </product>
+    <product>
+        <id>55</id>
+        <name>Nutella</name>
+        <manufacturer>Ferrero idfjvnd</manufacturer>
+        <price>800</price>
+    </product>
+</products>

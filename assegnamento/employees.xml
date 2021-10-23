@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<employees>
+    <employee>
+        <name>Andrea</name>
+        <surname>Filippino</surname>
+        <username>admin</username>
+        <password>patata</password>
+        <admin>true</admin>
+    </employee>
+    <employee>
+        <name>Vanessa</name>
+        <surname>SuperBeautiful</surname>
+        <username>iloveyou</username>
+        <password>potato</password>
+        <admin>true</admin>
+    </employee>
+    <employee>
+        <name>Giovanni</name>
+        <surname>Giorgio</surname>
+        <username>giogio89</username>
+        <password>spiritello</password>
+        <admin>false</admin>
+    </employee>
+    <employee>
+        <name>Andrea</name>
+        <surname>Pierolino</surname>
+        <username>cascione</username>
+        <password>wikwikwokwok</password>
+        <admin>false</admin>
+    </employee>
+</employees>

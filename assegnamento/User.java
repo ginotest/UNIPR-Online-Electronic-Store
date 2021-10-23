@@ -37,7 +37,7 @@ public class User extends ManageData{
 		 System.out.print(i+1 + ")  ");
 		    for (int j = 1; j < products.get(i).size(); j++) 
 	        System.out.format("%-25s",products.get(i).get(j));
-		        //System.out.print(products.get(i).get(j)+"\t\t\t");
+		        //System.out.print(products.get(i).get(j)+"\t\t\t"); wawa
 		    System.out.println();
 		}
 	 System.out.println();

@@ -66,7 +66,7 @@ public class Main extends User_Interface{
 			switch(input.nextInt()) {
 			
 			case 1:
-				admin.addUser();
+				admin.add("employee");
 				break;
 				
 			case 2:
@@ -74,7 +74,7 @@ public class Main extends User_Interface{
 				break;
 				
 			case 3:
-				admin.removeUser();
+				admin.remove("employee");
 				break;
 
 			default:
@@ -97,11 +97,11 @@ public class Main extends User_Interface{
 			switch(input.nextInt()) {
 			
 			case 1:
-				admin.addProductType();
+				admin.add("product");
 				break;
 				
 			case 2:
-				admin.removeProductType();
+				admin.remove("product");
 				break;
 			default:
 				break;

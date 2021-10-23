@@ -261,6 +261,11 @@ public abstract class ManageData {
 				if (!password.isEmpty())
 					array.add(password);
 			}
+			isAdmin = getTextValue(isAdmin, doc, "admin", i);
+			if (isAdmin != null) {
+				if (!isAdmin.isEmpty())
+					array.add(isAdmin);
+			}
 
 			System.out.println(array); //debug
 			}

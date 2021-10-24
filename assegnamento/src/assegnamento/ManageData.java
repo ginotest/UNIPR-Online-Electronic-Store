@@ -7,7 +7,12 @@ import javax.xml.parsers.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.*;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
+
 import org.xml.sax.*;
+
 import org.w3c.dom.*;
 
 public abstract class ManageData {
@@ -27,6 +32,17 @@ public abstract class ManageData {
 	private static String[] users = {"name", "surname", "username", "password"};
 	private static String[] product = {"id", "name", "manufacturer", "price" };
 
+	public static void save(Element source, String output) {
+		
+		try {
+			Transformer transformer = TransformerFactory.newInstance().newTransformer(new StreamSource(new File(".\\src\\assegnamento\\trim-whitespace.xslt")));
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			transformer.setOutputProperty(OutputKeys.STANDALONE, "no");
+			transformer.transform(new DOMSource(source), new StreamResult(".\\src\\assegnamento\\" + output));
+			} catch (Exception e)    {
+				e.printStackTrace();  
+			} 
+	}
 
 	public static void addData(String type, String[] content)  {
 		String[] xNodes = new String[5];
@@ -140,7 +156,53 @@ public abstract class ManageData {
 		}
 	}
  
+	public static void editData(String type, int option, String select, String content) {
+		String xFile = "";
+		int idx = 0;
+		String[][] xElement = {{"username", "password", "name", "surname", "admin"},{"id", "name", "manufacturer", "price" }, {"name", "surname", "username", "password"}};
+		
+		if(type == "user") {
+			xFile = files[2]; idx = 3;
+		}
+		else if(type == "product") {
+			xFile = files[1]; idx = 1;
+		}
+		else if(type == "employee") {
+			xFile = files[0]; idx = 0;
+		}
+		Document dom;
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		try {
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			dom = db.parse(".\\src\\assegnamento\\"+ xFile);
+			NodeList nodeList = dom.getElementsByTagName(type); 
+			Element doc = dom.getDocumentElement();
+			
+			for (int i = 0; i < nodeList.getLength(); i++) {
+				username = getTextValue(username, doc, "username", i);
+				if (username != null && !username.isEmpty() && username.equals(select)) 
+						setTextValue(doc, xElement[idx][option], i, content, xFile);
+			}
 
+		} catch (Exception e)    {
+			e.printStackTrace();  
+		} 
+
+	}
+	
+	public static void setTextValue(Element doc, String tag, int index, String content, String file) {
+
+		NodeList nl;
+		nl = doc.getElementsByTagName(tag);
+
+		if (nl.getLength() > 0 && nl.item(index).hasChildNodes()) {
+			nl.item(index).getFirstChild().setNodeValue(content);;
+		}
+		
+		save(doc, file);
+
+	}
+	
 	public static ArrayList<String> getAdmin(){
 		String xFile = files[0];
 
@@ -260,6 +322,11 @@ public abstract class ManageData {
 			if ( password != null) {
 				if (!password.isEmpty())
 					array.add(password);
+			}
+			isAdmin = getTextValue(isAdmin, doc, "admin", i);
+			if (isAdmin != null) {
+				if (!isAdmin.isEmpty())
+					array.add(isAdmin);
 			}
 
 			System.out.println(array); //debug

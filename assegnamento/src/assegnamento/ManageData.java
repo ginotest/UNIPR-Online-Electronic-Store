@@ -135,24 +135,14 @@ public abstract class ManageData {
 		else if(type == "employee") {
 			xFile = files[0]; idx = 0;
 		}
-		
-		Document dom;
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		try {
-			DocumentBuilder db = dbf.newDocumentBuilder();
-			dom = db.parse(".\\src\\assegnamento\\"+ xFile);
-			NodeList nodeList = dom.getElementsByTagName(type); 
-			Element doc = dom.getDocumentElement();
 
-			for (int i = 0; i < nodeList.getLength(); i++) {
-				username = getTextValue(username, doc, "username", i);
-				if (username != null && !username.isEmpty() && username.equals(select)) 
-					setTextValue(doc, xElement[idx][option], i, content, xFile);
-			}
+		Element doc = docBuilder(xFile, type);
 
-		} catch (Exception e)    {
-			e.printStackTrace();  
-		} 
+		for (int i = 0; i < doc.getElementsByTagName(type).getLength(); i++) {
+			username = getTextValue(username, doc, "username", i);
+			if (username != null && !username.isEmpty() && username.equals(select)) 
+				setTextValue(doc, xElement[idx][option], i, content, xFile);
+		}
 
 	}
 
@@ -170,41 +160,32 @@ public abstract class ManageData {
 		}
 		String[][] xElements= {users, product};
 
-		Document dom;
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		try {
+		Element doc = docBuilder(xFile, type);
 
-			DocumentBuilder db = dbf.newDocumentBuilder();
-			dom = db.parse(".\\src\\assegnamento\\"+xFile);
-			NodeList nodeList = dom.getElementsByTagName(type); 
-			Element doc = dom.getDocumentElement();
-			elements = new ArrayList<ArrayList<String>>();
-			for (int i = 0; i < nodeList.getLength(); i++) {
+		elements = new ArrayList<ArrayList<String>>();
+		for (int i = 0; i < doc.getElementsByTagName(type).getLength(); i++) {
 
-				array = new ArrayList<String>();
+			array = new ArrayList<String>();
 
-				for (int j = 0; j < 4; j++) {
+			for (int j = 0; j < 4; j++) {
 
-					data = getTextValue(data, doc, xElements[idx][j], i);
-					if (data != null) {
-						if (!data.isEmpty())
-							array.add(data);
-					}
+				data = getTextValue(data, doc, xElements[idx][j], i);
+				if (data != null) {
+					if (!data.isEmpty())
+						array.add(data);
 				}
-
-				if(type == "employee") {
-					isAdmin = getTextValue(isAdmin, doc, "admin", i);
-					if (isAdmin != null) {
-						if (!isAdmin.isEmpty())
-							array.add(isAdmin);
-					}
-				}
-				elements.add(array);
 			}
 
-		} catch (Exception e)    {
-			e.printStackTrace();  
-		} 
+			if(type == "employee") {
+				isAdmin = getTextValue(isAdmin, doc, "admin", i);
+				if (isAdmin != null) {
+					if (!isAdmin.isEmpty())
+						array.add(isAdmin);
+				}
+			}
+			elements.add(array);
+		}
+
 
 		return elements;
 	}
@@ -256,30 +237,33 @@ public abstract class ManageData {
 		else if(type == "employee") {
 			xFile = files[0];
 		}
-		Document dom;
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		try {
-			DocumentBuilder db = dbf.newDocumentBuilder();
-			dom = db.parse(".\\src\\assegnamento\\"+xFile);
-			NodeList nodeList = dom.getElementsByTagName(type); 
-			Element doc = dom.getDocumentElement();
 
-			for (int i = 0; i < nodeList.getLength(); i++) {
-				username = getTextValue(username, doc, "username", i);
-				if ((username != null) && (!username.isEmpty()) && (username.equals(usern))) {
-					password = getTextValue(password, doc, "password", i);
-					if (( password != null) && (!password.isEmpty())) 
-						return password;
-				}
+		Element doc = docBuilder(xFile, type);
+
+		for (int i = 0; i < doc.getElementsByTagName(type).getLength(); i++) {
+			username = getTextValue(username, doc, "username", i);
+			if ((username != null) && (!username.isEmpty()) && (username.equals(usern))) {
+				password = getTextValue(password, doc, "password", i);
+				if (( password != null) && (!password.isEmpty())) 
+					return password;
 			}
-
-		} catch (Exception e)    {
-			e.printStackTrace();  
-		} 
+		}
 
 		return null;
 	}
 
+	public static Element docBuilder(String file, String type) {
+
+		Document dom = null;
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		try {
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			dom = db.parse(".\\src\\assegnamento\\"+file);
+		} catch (Exception e)    {
+			e.printStackTrace();  
+		} 
+		return dom.getDocumentElement();
+	}
 
 	static String getTextValue(String def, Element doc, String tag, int index) {
 
@@ -293,8 +277,8 @@ public abstract class ManageData {
 
 		return value;
 	}
-	
-	public static void setTextValue(Element doc, String tag, int index, String content, String file) {
+
+	static void setTextValue(Element doc, String tag, int index, String content, String file) {
 
 		NodeList nl;
 		nl = doc.getElementsByTagName(tag);
@@ -330,7 +314,7 @@ public abstract class ManageData {
 		} 
 	}
 
-	
+
 }
 
 

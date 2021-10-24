@@ -70,7 +70,7 @@ public class Main extends User_Interface{
 				break;
 				
 			case 2:
-				admin.editUser();
+				admin.edit("employee");
 				break;
 				
 			case 3:

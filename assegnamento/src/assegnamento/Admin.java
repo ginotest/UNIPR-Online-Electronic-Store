@@ -28,6 +28,7 @@ public class Admin extends ManageData{
 			select=1; length=4;
 		}
 		
+		
 		for(int i=0; i<length; i++) {
 			System.out.print(message[select][i]);
 			fields[i] = input.next();
@@ -35,8 +36,28 @@ public class Admin extends ManageData{
 		addData(type, fields);
 	}
 
-	void editUser(){
-		readAll("employee");
+	void edit(String type){
+		int idx = 0, length = 0;
+		String[][] message = {{"Username", "Password", "Name", "Surname", "Adminship"},{"ID", "Name Product", "Manufacturer", "Price (USD)" }};
+		
+		if(type=="employee") {
+			idx=0; length=5;
+		}
+		else if(type=="product") {
+			idx=1; length=4;
+		}
+		
+		System.out.print("Type the " + message[idx][0].toUpperCase() + " of the " + type + " you want to edit: ");
+		String select = input.next();
+		System.out.println("You can change the following information: ");
+		for(int i=0; i<length;i++)
+			System.out.println(i+1 +") " + message[idx][i]);
+		
+		System.out.print("What do you wanna change?  ");
+		int n = input.nextInt()-1;
+		System.out.print("Write the new " + message[idx][n].toLowerCase() + ": ");
+		String content = input.next();
+		editData("employee", n, select, content);
 	}
 
 	void remove(String type) {

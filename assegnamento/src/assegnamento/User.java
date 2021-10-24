@@ -29,7 +29,7 @@ public class User extends ManageData{
 	}
 	
 	void showProducts() {
-	 ArrayList<ArrayList<String>> products = getAllProducts();
+	 ArrayList<ArrayList<String>> products = readAll("product");
 	 //System.out.println(products);
      System.out.format("%-25s%-25s%-25s","\tNAME", "MANUFACTURER", "PRICE");
 	 //System.out.println("    NAME\t\t\tMANUFACTURER\t\tPRICE");

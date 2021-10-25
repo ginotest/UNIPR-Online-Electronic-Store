@@ -296,14 +296,23 @@ public class Main extends User_Interface{
 				userMenu();
 				break;
 
-			case 8: //ask for the password
-				System.out.print("\n Are you sure you want to delete this account? (Y/N): ");
-				String decision = input.next();
-				if((decision.equals("Y")) || (decision.equals("y"))) {
-					user.removeUser();
-					sleep(3000);
-					mainMenu();
-				}else {
+			case 8:
+
+				System.out.println("Password: ");
+				String password = input.next();
+				if(user.Login(user.getUsername(), password)) {
+					System.out.print("\n Are you sure you want to delete this account? (Y/N): ");
+					String decision = input.next();
+					if((decision.equalsIgnoreCase("y"))) {
+						user.removeUser();
+						sleep(3000);
+						mainMenu();
+					}else {
+						sleep(1000);
+						profileMenu();
+					}}
+				else {
+					System.out.println("Incorrect!");
 					sleep(1000);
 					profileMenu();
 				}

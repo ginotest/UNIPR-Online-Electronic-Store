@@ -265,14 +265,14 @@ public class Main extends User_Interface{
 			clearScreen();
 			title(1);
 			menu(8);
-			switch(input.nextInt()) {
+			switch(input.next()) {
 
-			case 0:
+			case "0":
 				run = false;
 				closeStore();
 				break;
 
-			case 1:
+			case "1":
 				System.out.print("\n Enter new username: ");
 				String newUsername = input.next();
 				user.changeUsername(newUsername);
@@ -280,7 +280,7 @@ public class Main extends User_Interface{
 				sleep(2000);
 				userMenu();
 				break;
-			case 2:
+			case "2":
 				while(true) {
 					System.out.print("\n Current password: ");
 					String oldPassword = input.next();
@@ -296,8 +296,7 @@ public class Main extends User_Interface{
 				userMenu();
 				break;
 
-			case 8:
-				//hello
+			case "8":
 				System.out.println("Password: ");
 				String password = input.next();
 				if(user.Login(user.getUsername(), password)) {
@@ -318,11 +317,14 @@ public class Main extends User_Interface{
 				}
 				break;
 				
-			case 9:
+			case "9":
 				userMenu();
 				break;
 
 			default:
+				System.out.println("\nUNAVAILABLE CHOICE!");
+				sleep(3000);
+				profileMenu();
 				break;
 			}
 		}

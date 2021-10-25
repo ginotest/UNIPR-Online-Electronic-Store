@@ -297,7 +297,7 @@ public class Main extends User_Interface{
 				break;
 
 			case 8:
-
+				//hello
 				System.out.println("Password: ");
 				String password = input.next();
 				if(user.Login(user.getUsername(), password)) {
@@ -317,7 +317,7 @@ public class Main extends User_Interface{
 					profileMenu();
 				}
 				break;
-
+				//hello
 			case 9:
 				userMenu();
 				break;

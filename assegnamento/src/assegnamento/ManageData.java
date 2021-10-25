@@ -313,6 +313,30 @@ public abstract class ManageData {
 			e.printStackTrace();  
 		} 
 	}
+	
+	public static boolean exist(String type, String select) {
+		String xFile = "";
+		String id = "";
+		if(type == "user") {
+			xFile = files[2]; id = "username";
+		}
+		else if(type == "product") {
+			xFile = files[1]; id = "id";
+		}
+		else if(type == "employee") {
+			xFile = files[0]; id = "username";
+		}
+
+		Element doc = docBuilder(xFile);
+
+		for (int i = 0; i < doc.getElementsByTagName(type).getLength(); i++) {
+			username = getTextValue(username, doc, id, i);
+			if (username != null && !username.isEmpty() && username.equals(select)) {	
+				return true;}
+		}
+		return false;
+
+	}
 
 
 }

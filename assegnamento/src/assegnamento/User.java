@@ -28,7 +28,7 @@ public class User extends ManageData{
 		return false;
 	}
 	
-	void showProducts() {
+	void showProducts() {//da mettere  dentro la funzione readAll
 	 ArrayList<ArrayList<String>> products = readAll("product");
 	 //System.out.println(products);
      System.out.format("%-25s%-25s%-25s","\tNAME", "MANUFACTURER", "PRICE");
@@ -48,6 +48,29 @@ public class User extends ManageData{
 	}
 	
 	void changeUsername(String newUsername){
+		editData("user", 2, usernameLogged, newUsername);
+		User.usernameLogged = newUsername;
+		System.out.println("Username changed");
+	}
+	
+	boolean changePassword(String oldPassword, String newPassword, String newPassword2){
 		
+		
+			if(newPassword.equals(newPassword2)) {
+				if (Login(usernameLogged, oldPassword)) {
+					editData("user", 3, usernameLogged, newPassword);
+					System.out.println("Password changed");
+					return true;
+				}
+				else {
+					System.out.println("Your old password was entered incorrectly, please enter it again.");
+					return false;
+				}
+			}
+			else {
+				System.out.println("Passwords do not match");
+				return false;
+			}
+			
 	}
 }

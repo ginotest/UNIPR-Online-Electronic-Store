@@ -127,7 +127,7 @@ public abstract class ManageData {
 		String[][] xElement = {{"username", "password", "name", "surname", "admin"},{"id", "name", "manufacturer", "price" }, {"name", "surname", "username", "password"}};
 
 		if(type == "user") {
-			xFile = files[2]; idx = 3;
+			xFile = files[2]; idx = 2;
 		}
 		else if(type == "product") {
 			xFile = files[1]; idx = 1;
@@ -136,7 +136,7 @@ public abstract class ManageData {
 			xFile = files[0]; idx = 0;
 		}
 
-		Element doc = docBuilder(xFile, type);
+		Element doc = docBuilder(xFile);
 
 		for (int i = 0; i < doc.getElementsByTagName(type).getLength(); i++) {
 			username = getTextValue(username, doc, "username", i);
@@ -160,7 +160,7 @@ public abstract class ManageData {
 		}
 		String[][] xElements= {users, product};
 
-		Element doc = docBuilder(xFile, type);
+		Element doc = docBuilder(xFile);
 
 		elements = new ArrayList<ArrayList<String>>();
 		for (int i = 0; i < doc.getElementsByTagName(type).getLength(); i++) {
@@ -238,7 +238,7 @@ public abstract class ManageData {
 			xFile = files[0];
 		}
 
-		Element doc = docBuilder(xFile, type);
+		Element doc = docBuilder(xFile);
 
 		for (int i = 0; i < doc.getElementsByTagName(type).getLength(); i++) {
 			username = getTextValue(username, doc, "username", i);
@@ -252,7 +252,7 @@ public abstract class ManageData {
 		return null;
 	}
 
-	public static Element docBuilder(String file, String type) {
+	public static Element docBuilder(String file) {
 
 		Document dom = null;
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();

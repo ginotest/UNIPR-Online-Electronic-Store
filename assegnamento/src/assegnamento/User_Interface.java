@@ -79,9 +79,9 @@ public class User_Interface {
 			break;
 			
 		case 5:
-			System.out.println("------------------------------\t\t--------------------------------");
-			System.out.println("| Type 1: Shop Products       |\t\t| Type 2: Search Product       |");
-			System.out.println("------------------------------\t\t--------------------------------\n");
+			System.out.println("                  -----------------------------");
+			System.out.println("                 |   Type 1: Shop Products     |");
+			System.out.println("                  -----------------------------\n");
 			System.out.println("------------------------------\t\t--------------------------------");
 			System.out.println("| Type 7: Go TO CART          |\t\t| Type 8:  Manage Profile         |");
 			System.out.println("------------------------------\t\t--------------------------------\n");
@@ -92,9 +92,12 @@ public class User_Interface {
 			break;
 			
 		case 6:
-			System.out.println("------------------------------\t\t------------------------------------");
-			System.out.println("| Type 1: Add Product To cart |\t\t| Type 2: Remove Product From cart |");
-			System.out.println("------------------------------\t\t------------------------------------\n");
+			System.out.println("                  -----------------------------------");
+			System.out.println("                 |   Type 1: Add Product to Cart     |");
+			System.out.println("                  -----------------------------------\n");
+			System.out.println("------------------------------\t\t------------------------");
+			System.out.println("| Type 2: Search Product     |\t\t| Type 7: GO TO CART    |");
+			System.out.println("------------------------------\t\t------------------------\n");
 			System.out.println("----------------------------------\t\t--------------------------------");
 			System.out.println("| Type 9: RETURN TO PREVIOUS MENU |\t\t| Type 0: EXIT                 |");
 			System.out.println("----------------------------------\t\t--------------------------------");

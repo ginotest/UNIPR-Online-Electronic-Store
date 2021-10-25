@@ -28,6 +28,10 @@ public class User extends ManageData{
 		return false;
 	}
 	
+	String getUsername() {
+		return User.usernameLogged;
+	}
+	
 	void showProducts() {//da mettere  dentro la funzione readAll
 	 ArrayList<ArrayList<String>> products = readAll("product");
 	 //System.out.println(products);

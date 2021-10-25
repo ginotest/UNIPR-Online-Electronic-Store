@@ -11,7 +11,6 @@ import org.w3c.dom.*;
 public abstract class ManageData {
 
 	private static String data;
-	private static String name;
 	private static String username;
 	private static String password;
 	private static String isAdmin;

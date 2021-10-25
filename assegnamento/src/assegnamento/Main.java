@@ -18,99 +18,12 @@ public class Main extends User_Interface{
 			e.printStackTrace();
 		}
 	}
-
-
-
-	static void adminMenu() {
-		boolean run = true;
-		while(run==true) {
-			clearScreen();
-			title(2);
-			menu(2);
-			switch(input.nextInt()) {
-
-			case 0:
-				run = false;
-				closeStore();
-				break;
-
-			case 1:
-				adminSubMenu_user();
-				break;
-
-			case 2:
-				adminSubMenu_product();
-				break;
-
-			case 9:
-				mainMenu();
-				break;
-
-			default:
-				break;
-			}
-		}
+	
+	static void unavailable() {
+		System.out.println("\nUNAVAILABLE!");
+		sleep(3000);
 	}
-
-
-
-	static void adminSubMenu_user() {
-
-		boolean run = true;
-
-		while(run==true) {
-			clearScreen();
-			title(2);
-			menu(3);
-
-			switch(input.nextInt()) {
-
-			case 1:
-				admin.add("employee");
-				break;
-
-			case 2:
-				admin.edit("employee");
-				break;
-
-			case 3:
-				admin.remove("employee");
-				break;
-
-			default:
-				break;
-			}
-		}
-	}
-
-
-
-	static void adminSubMenu_product() {
-
-		boolean run = true;
-
-		while(run==true) {
-			clearScreen();
-			title(2);
-			menu(4);
-
-			switch(input.nextInt()) {
-
-			case 1:
-				admin.add("product");
-				break;
-
-			case 2:
-				admin.remove("product");
-				break;
-			default:
-				break;
-			}
-		}
-	}
-
-
-
+	
 	static void login(String who) {
 
 		String username= "", password = "";
@@ -160,6 +73,98 @@ public class Main extends User_Interface{
 
 
 
+	static void adminMenu() {
+		boolean run = true;
+		while(run==true) {
+			clearScreen();
+			title(2);
+			menu(2);
+			switch(input.next()) {
+
+			case "0":
+				run = false;
+				closeStore();
+				break;
+
+			case "1":
+				adminSubMenu_user();
+				break;
+
+			case "2":
+				adminSubMenu_product();
+				break;
+
+			case "9":
+				mainMenu();
+				break;
+
+			default:
+				unavailable();
+				adminMenu();
+				break;
+			}
+		}
+	}
+
+
+	static void adminSubMenu_user() {
+
+		boolean run = true;
+
+		while(run==true) {
+			clearScreen();
+			title(2);
+			menu(3);
+
+			switch(input.next()) {
+
+			case "1":
+				admin.add("employee");
+				break;
+
+			case "2":
+				admin.edit("employee");
+				break;
+
+			case "3":
+				admin.remove("employee");
+				break;
+
+			default:
+				unavailable();
+				adminSubMenu_user();
+				break;
+			}
+		}
+	}
+
+
+	static void adminSubMenu_product() {
+
+		boolean run = true;
+
+		while(run==true) {
+			clearScreen();
+			title(2);
+			menu(4);
+
+			switch(input.next()) {
+
+			case "1":
+				admin.add("product");
+				break;
+
+			case "2":
+				admin.remove("product");
+				break;
+			default:
+				unavailable();
+				adminSubMenu_product();
+				break;
+			}
+		}
+	}
+
 
 	static void userMenu() {
 		boolean run = true;
@@ -167,33 +172,35 @@ public class Main extends User_Interface{
 			clearScreen();
 			title(1);
 			menu(5);
-			switch(input.nextInt()) {
+			switch(input.next()) {
 
-			case 0:
+			case "0":
 				run = false;
 				closeStore();
 				break;
 
-			case 1:
+			case "1":
 				clearScreen();
 				title(1);
 				user.showProducts();
 				productsMenu();
 				break;
 
-			case 2:
+			case "2":
 				searchProductMenu();
 				break;
 
-			case 8:
+			case "8":
 				profileMenu();
 				break;
 
-			case 9:
+			case "9":
 				mainMenu();
 				break;
 
 			default:
+				unavailable();
+				userMenu();
 				break;
 			}
 		}
@@ -203,26 +210,28 @@ public class Main extends User_Interface{
 		boolean run = true;
 		while(run==true) {
 			menu(6);
-			switch(input.nextInt()) {
+			switch(input.next()) {
 
-			case 0:
+			case "0":
 				run = false;
 				closeStore();
 				break;
 
-			case 1:
+			case "1":
 
 				break;
 
-			case 2:
+			case "2":
 
 				break;
 
-			case 9:
+			case "9":
 				userMenu();
 				break;
 
 			default:
+				unavailable();
+				productsMenu();
 				break;
 			}
 		}
@@ -235,30 +244,33 @@ public class Main extends User_Interface{
 			clearScreen();
 			title(1);
 			menu(7);
-			switch(input.nextInt()) {
+			switch(input.next()) {
 
-			case 0:
+			case "0":
 				run = false;
 				closeStore();
 				break;
 
-			case 1:
+			case "1":
 				break;
 
-			case 2:
+			case "2":
 
 				break;
 
-			case 9:
+			case "9":
 				userMenu();
 				break;
 
 			default:
+				unavailable();
+				searchProductMenu();
 				break;
 			}
 		}
 	}
 
+	
 	static void profileMenu(){
 		boolean run = true;
 		while(run==true) {
@@ -322,8 +334,7 @@ public class Main extends User_Interface{
 				break;
 
 			default:
-				System.out.println("\nUNAVAILABLE CHOICE!");
-				sleep(3000);
+				unavailable();
 				profileMenu();
 				break;
 			}
@@ -340,31 +351,33 @@ public class Main extends User_Interface{
 			title(1);
 			menu(1);
 
-			switch(input.nextInt()) {
+			switch(input.next()) {
 
-			case 0:
+			case "0":
 				closeStore();
 				break;
 
-			case 1:
+			case "1":
 				run = false;
 				login("user");
 				break;
 
-			case 2:
+			case "2":
 				user.register();
 				sleep(3000);
 				userMenu();
 				break;
 
-			case 3:
+			case "3":
 				run = false;
 				login("admin");
 
-			case 4:
+			case "4":
 				break;
 
 			default:
+				unavailable();
+				mainMenu();
 				break;
 			}
 		}
@@ -374,7 +387,6 @@ public class Main extends User_Interface{
 
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		mainMenu();
 	}
 

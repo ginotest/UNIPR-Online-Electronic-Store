@@ -52,9 +52,13 @@ public class User extends ManageData{
 	}
 	
 	void changeUsername(String newUsername){
+		if(!exist("user", newUsername)) {
 		editData("user", 2, usernameLogged, newUsername);
 		User.usernameLogged = newUsername;
 		System.out.println("Username changed");
+		}
+		else
+			System.out.println("Username already exists");
 	}
 	
 	boolean changePassword(String oldPassword, String newPassword, String newPassword2){

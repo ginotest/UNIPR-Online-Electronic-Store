@@ -2,44 +2,44 @@
 <products>
     <product>
         <id>69</id>
-        <name>Nutella</name>
-        <manufacturer>Ferrero</manufacturer>
-        <price>800</price>
+        <name>Printer</name>
+        <manufacturer>Epson</manufacturer>
+        <price>53.90</price>
+        <quantity>40</quantity>
     </product>
     <product>
         <id>12</id>
-        <name>Nutella</name>
-        <manufacturer>Ferrero</manufacturer>
-        <price>800</price>
+        <name>MateBook</name>
+        <manufacturer>Huawei</manufacturer>
+        <price>790.00</price>
+        <quantity>12</quantity>
     </product>
     <product>
         <id>55</id>
-        <name>Nutella</name>
-        <manufacturer>Ferrero</manufacturer>
-        <price>800</price>
+        <name>Printer</name>
+        <manufacturer>Samsung</manufacturer>
+        <price>99.90</price>
+        <quantity>33</quantity>
     </product>
     <product>
-        <id>69</id>
-        <name>Nutella</name>
-        <manufacturer>Ferrero</manufacturer>
-        <price>800</price>
-    </product>
-    <product>
-        <id>55</id>
-        <name>Nutella hjdv</name>
-        <manufacturer>Ferrero</manufacturer>
-        <price>800</price>
+        <id>70</id>
+        <name>Airpods</name>
+        <manufacturer>Apple</manufacturer>
+        <price>165.00</price>
+        <quantity>11</quantity>
     </product>
     <product>
         <id>55</id>
-        <name>Nutella</name>
-        <manufacturer>Ferrero idfjvnd</manufacturer>
-        <price>800</price>
+        <name>earbuds</name>
+        <manufacturer>Samsumg</manufacturer>
+        <price>119.00</price>
+        <quantity>15</quantity>
     </product>
     <product>
-        <id>1245</id>
-        <name>Mouse</name>
-        <manufacturer>Razer</manufacturer>
-        <price>249</price>
+        <id>15</id>
+        <name>Wireless Speaker</name>
+        <manufacturer>Xiaomi</manufacturer>
+        <price>54.45</price>
+        <quantity>5</quantity>
     </product>
 </products>

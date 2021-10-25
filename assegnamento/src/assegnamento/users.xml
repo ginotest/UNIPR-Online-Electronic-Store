@@ -5,11 +5,13 @@
         <surname>bdxfgbxdc</surname>
         <username>a</username>
         <password>a</password>
+        <cart></cart>
     </user>
     <user>
         <name>vanessa</name>
         <surname>kingsley</surname>
         <username>vane</username>
         <password>1234</password>
+        <cart></cart>
     </user>
 </users>

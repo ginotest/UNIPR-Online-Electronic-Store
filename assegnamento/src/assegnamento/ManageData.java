@@ -145,7 +145,7 @@ public abstract class ManageData {
 
 	}
 
-	public static ArrayList<ArrayList<String>> readAll(String type){
+	public ArrayList<ArrayList<String>> readAll(String type){
 		String xFile = "";
 		int idx =0;
 		if(type == "user") {
@@ -170,8 +170,13 @@ public abstract class ManageData {
 
 				data = getTextValue(data, doc, xElements[idx][j], i);
 				if (data != null) {
-					if (!data.isEmpty())
-						array.add(data);
+					if (!data.isEmpty()) {
+						if(xElements[idx][j].equals("price"))
+							array.add("$"+ data);
+						else
+							array.add(data );
+					}
+
 				}
 			}
 
@@ -184,7 +189,14 @@ public abstract class ManageData {
 			}
 			elements.add(array);
 		}
-
+		
+		for (int i = 0; i < elements.size(); i++) {
+			System.out.print("\n" + (i+1) + ")  ");
+			for (int j = idx; j < elements.get(i).size(); j++) 
+				System.out.format("%-25s",elements.get(i).get(j));
+			System.out.println();
+		}
+		System.out.println();
 
 		return elements;
 	}
@@ -312,7 +324,7 @@ public abstract class ManageData {
 			e.printStackTrace();  
 		} 
 	}
-	
+
 	public static boolean exist(String type, String select) {
 		String xFile = "";
 		String id = "";

@@ -18,7 +18,7 @@ public abstract class ManageData {
 	private static ArrayList<ArrayList<String>> elements;
 	private static String[] files= {"employees.xml", "products.xml", "users.xml"};
 	private static String[] users = {"name", "surname", "username", "password"};
-	private static String[] product = {"id", "name", "manufacturer", "price" };
+	private static String[] product = {"id", "name", "manufacturer", "price", "quantity"};
 
 
 	public static void addData(String type, String[] content)  {
@@ -61,6 +61,16 @@ public abstract class ManageData {
 
 			if(type == "employee") {
 				data = doc.createElement("admin");
+				data.appendChild(doc.createTextNode(content[4]));
+				newData.appendChild(data);
+			}
+			if(type == "user") {
+				data = doc.createElement("cart");
+				data.appendChild(doc.createTextNode(""));
+				newData.appendChild(data);
+			}
+			if(type == "product") {
+				data = doc.createElement("quantity");
 				data.appendChild(doc.createTextNode(content[4]));
 				newData.appendChild(data);
 			}
@@ -123,7 +133,7 @@ public abstract class ManageData {
 	public static void editData(String type, int option, String select, String content) {
 		String xFile = "";
 		int idx = 0;
-		String[][] xElement = {{"username", "password", "name", "surname", "admin"},{"id", "name", "manufacturer", "price" }, {"name", "surname", "username", "password"}};
+		String[][] xElement = {{"username", "password", "name", "surname", "admin"},{"id", "name", "manufacturer", "price", "quantity" }, {"username", "password", "name", "surname"}};
 
 		if(type == "user") {
 			xFile = files[2]; idx = 2;
@@ -136,9 +146,8 @@ public abstract class ManageData {
 		}
 
 		Element doc = docBuilder(xFile);
-
 		for (int i = 0; i < doc.getElementsByTagName(type).getLength(); i++) {
-			username = getTextValue(username, doc, "username", i);
+			username = getTextValue(username, doc, xElement[idx][0], i);
 			if (username != null && !username.isEmpty() && username.equals(select)) 
 				setTextValue(doc, xElement[idx][option], i, content, xFile);
 		}
@@ -190,17 +199,22 @@ public abstract class ManageData {
 			elements.add(array);
 		}
 		
-		for (int i = 0; i < elements.size(); i++) {
-			System.out.print("\n" + (i+1) + ")  ");
-			for (int j = idx; j < elements.get(i).size(); j++) 
-				System.out.format("%-25s",elements.get(i).get(j));
-			System.out.println();
-		}
-		System.out.println();
+		
 
 		return elements;
 	}
 
+	public void printProducts(){
+		for (int i = 0; i < elements.size(); i++) {
+			System.out.print("\n" + (i+1) + ")  ");
+			for (int j = 1; j < elements.get(i).size(); j++) 
+				System.out.format("%-25s",elements.get(i).get(j));
+			System.out.println();
+		}
+		System.out.println();
+		
+	} 
+	
 	public static ArrayList<String> getAdmin(){
 
 		String xFile = files[0];

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Admin extends ManageData{
 
 	public Scanner input = new Scanner(System.in);
+	public Scanner input2 = new Scanner(System.in);
 	private static ArrayList<String> admin;
 	
 	
@@ -17,46 +18,47 @@ public class Admin extends ManageData{
 	}
 	
 	void add(String type) {
-		int select = 0, length = 0;
+		int select = 0;
 		String [] fields = new String[5];
-		String[][] message = {{"Name:", "Surname: ", "Username: ", "Password: ", "Admin: "},{"ID: ", "Name Product: ", "Manufacturer: ", "Price (USD): " }};
+		String[][] message = {{"Name:", "Surname: ", "Username: ", "Password: ", "Admin: "},{"ID: ", "Name Product: ", "Manufacturer: ", "Price (USD): ", "Quantity: " }};
 		
 		if(type=="employee") {
-			select=0; length=5;
+			select=0;
 		}
 		else if(type=="product") {
-			select=1; length=4;
+			select=1;
 		}
 		
 		
-		for(int i=0; i<length; i++) {
+		for(int i=0; i<5; i++) {
 			System.out.print(message[select][i]);
-			fields[i] = input.next();
+			fields[i] = input.nextLine();
 		}
 		addData(type, fields);
 	}
 
 	void edit(String type){
-		int idx = 0, length = 0;
-		String[][] message = {{"Username", "Password", "Name", "Surname", "Adminship"},{"ID", "Name Product", "Manufacturer", "Price (USD)" }};
+		int idx = 0;
+		String[][] message = {{"Username", "Password", "Name", "Surname", "Adminship (true/false)"},{"ID", "Name Product", "Manufacturer", "Price (USD)", "Quantity"}};
 		
 		if(type=="employee") {
-			idx=0; length=5;
+			idx=0;
 		}
 		else if(type=="product") {
-			idx=1; length=4;
+			idx=1;
 		}
 		
 		System.out.print("Type the " + message[idx][0].toUpperCase() + " of the " + type + " you want to edit: ");
 		String select = input.next();
 		System.out.println("You can change the following information: ");
-		for(int i=0; i<length;i++)
+		for(int i=0; i<5;i++)
 			System.out.println(i+1 +") " + message[idx][i]);
 		
 		System.out.print("What do you wanna change?  ");
 		int n = input.nextInt()-1;
 		System.out.print("Write the new " + message[idx][n].toLowerCase() + ": ");
-		String content = input.next();
+		String content = input2.nextLine();
+		System.out.println(content);
 		editData("employee", n, select, content);
 	}
 

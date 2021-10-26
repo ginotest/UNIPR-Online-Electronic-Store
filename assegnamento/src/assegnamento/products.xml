@@ -42,4 +42,11 @@
         <price>54.45</price>
         <quantity>5</quantity>
     </product>
+    <product>
+        <id>1276</id>
+        <name>Wireless Keyboard</name>
+        <manufacturer>Omoton</manufacturer>
+        <price>8.34</price>
+        <quantity>3</quantity>
+    </product>
 </products>

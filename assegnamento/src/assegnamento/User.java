@@ -36,6 +36,7 @@ public class User extends ManageData{
 		System.out.format("%-25s%-25s%-25s","\tNAME", "MANUFACTURER", "PRICE");
 		System.out.println("\n------------------------------------------------------------------");
 		readAll("product");
+		printProducts();
 
 	}
 
@@ -45,7 +46,7 @@ public class User extends ManageData{
 
 	void changeUsername(String newUsername){
 		if(!exist("user", newUsername)) {
-			editData("user", 2, usernameLogged, newUsername);
+			editData("user", 0, usernameLogged, newUsername);
 			User.usernameLogged = newUsername;
 			System.out.println("Username changed");
 		}
@@ -58,7 +59,7 @@ public class User extends ManageData{
 
 		if(newPassword.equals(newPassword2)) {
 			if (Login(usernameLogged, oldPassword)) {
-				editData("user", 3, usernameLogged, newPassword);
+				editData("user", 1, usernameLogged, newPassword);
 				System.out.println("Password changed");
 				return true;
 			}

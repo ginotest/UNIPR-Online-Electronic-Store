@@ -29,6 +29,20 @@
         <quantity>11</quantity>
     </product>
     <product>
+        <id>66</id>
+        <name>iPencil</name>
+        <manufacturer>Apple</manufacturer>
+        <price>99.00</price>
+        <quantity>19</quantity>
+    </product>
+    <product>
+        <id>43</id>
+        <name>wireless Keyboard</name>
+        <manufacturer>Apple</manufacturer>
+        <price>59.00</price>
+        <quantity>19</quantity>
+    </product>
+    <product>
         <id>55</id>
         <name>earbuds</name>
         <manufacturer>Samsumg</manufacturer>

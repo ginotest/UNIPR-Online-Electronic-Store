@@ -1,5 +1,6 @@
 package assegnamento;
 
+
 public class Main extends User_Interface{
 	static Admin admin = new Admin();
 	static User user = new User();
@@ -34,9 +35,9 @@ public class Main extends User_Interface{
 
 		case "user":
 			System.out.print("\n username: ");
-			username = input.next();
+			username = input.nextLine();
 			System.out.print("\n password: ");
-			password = input.next();
+			password = input.nextLine();
 			if(user.Login(username, password)) {
 				System.out.println("\nRedirecting...");
 				sleep(2000);
@@ -54,9 +55,9 @@ public class Main extends User_Interface{
 
 		case "admin":
 			System.out.print("\n username: ");
-			username = input.next();
+			username = input.nextLine();
 			System.out.print("\n password: ");
-			password = input.next();
+			password = input.nextLine();
 			if(admin.login(username, password)) {
 				System.out.println("\nRedirecting...");
 				sleep(2000);
@@ -75,11 +76,11 @@ public class Main extends User_Interface{
 
 	static void adminMenu() {
 		boolean run = true;
-		while(run==true) {
+		while(run) {
 			clearScreen();
 			title(2);
 			menu(2);
-			switch(input.next()) {
+			switch(input.nextLine()) {
 
 			case "0":
 				run = false;
@@ -111,23 +112,26 @@ public class Main extends User_Interface{
 
 		boolean run = true;
 
-		while(run==true) {
+		while(run) {
 			clearScreen();
 			title(2);
 			menu(3);
 
-			switch(input.next()) {
+			switch(input.nextLine()) {
 
 			case "1":
 				admin.add("employee");
+				sleep(2000);
 				break;
 
 			case "2":
 				admin.edit("employee");
+				sleep(2000);
 				break;
 
 			case "3":
 				admin.remove("employee");
+				sleep(2500);
 				break;
 
 			default:
@@ -143,19 +147,21 @@ public class Main extends User_Interface{
 
 		boolean run = true;
 
-		while(run==true) {
+		while(run) {
 			clearScreen();
 			title(2);
 			menu(4);
 
-			switch(input.next()) {
+			switch(input.nextLine()) {
 
 			case "1":
 				admin.add("product");
+				sleep(2000);
 				break;
 
 			case "2":
 				admin.remove("product");
+				sleep(2500);
 				break;
 			default:
 				unavailable();
@@ -165,36 +171,39 @@ public class Main extends User_Interface{
 		}
 	}
 
+	
+	static void showProducts() {
+		clearScreen();
+		title(1);
+		user.showProducts();
+		productsMenu();
+	}
 
 	static void userMenu() {
 		boolean run = true;
-		while(run==true) {
+		while(run) {
 			clearScreen();
 			title(1);
 			menu(5);
-			switch(input.next()) {
+			switch(input.nextLine()) {
 
 			case "0":
-				run = false;
 				closeStore();
 				break;
 
 			case "1":
-				clearScreen();
-				title(1);
-				user.showProducts();
-				productsMenu();
-				break;
-
-			case "2":
-				searchProductMenu();
+				user.readProducts();
+				sleep(2000);
+				showProducts();
 				break;
 
 			case "8":
+				sleep(1500);
 				profileMenu();
 				break;
 
 			case "9":
+				sleep(2000);
 				mainMenu();
 				break;
 
@@ -208,12 +217,11 @@ public class Main extends User_Interface{
 
 	static void productsMenu() {
 		boolean run = true;
-		while(run==true) {
+		while(run) {
 			menu(6);
-			switch(input.next()) {
+			switch(input.nextLine()) {
 
 			case "0":
-				run = false;
 				closeStore();
 				break;
 
@@ -222,10 +230,12 @@ public class Main extends User_Interface{
 				break;
 
 			case "2":
-
+				sleep(1000);
+				searchProductMenu();
 				break;
 
 			case "9":
+				sleep(2000);
 				userMenu();
 				break;
 
@@ -236,57 +246,95 @@ public class Main extends User_Interface{
 			}
 		}
 	}
+	
+	
+	
+	static void searchProductMenu_sub(String choice) {
+		String str;
+		switch(choice) {
+		
+		case "0":
+			closeStore();
+			break;
+
+		case "1":
+			System.out.print("\nEnter product Name: ");
+			str = input.nextLine();
+			user.searchProducts("name", str);
+			break;
+
+		case "2":
+			System.out.print("\nEnter product Manufacturer: ");
+			str = input.nextLine();
+			user.searchProducts("manufacturer", str);
+			break;
+			
+		case "3":
+			System.out.print("\nEnter highest Price for products: ");
+			str = input.nextLine();
+			user.searchProducts("highestPrice", str);
+			break;
+			
+		case "4":
+			System.out.print("\nEnter lowest Price for products: ");
+			str = input.nextLine();
+			user.searchProducts("lowestPrice", str);
+			break;
+
+		case "9":
+			sleep(2000);
+			showProducts();
+			break;
+
+		default:
+			unavailable();
+			searchProductMenu();
+			break;
+		}
+	}
 
 
 	static void searchProductMenu() {
+		String[] array;
 		boolean run = true;
-		while(run==true) {
+		while(run) {
 			clearScreen();
 			title(1);
 			menu(7);
-			switch(input.next()) {
-
-			case "0":
-				run = false;
-				closeStore();
-				break;
-
-			case "1":
-				break;
-
-			case "2":
-
-				break;
-
-			case "9":
-				userMenu();
-				break;
-
-			default:
-				unavailable();
-				searchProductMenu();
-				break;
+			
+			String choices = input.nextLine().trim();
+			if(!(choices.length() == 0)) {
+				array = choices.split(" ");
+				
+				user.readProducts();
+				for(String choice: array) {
+					if (choice.trim().length() == 1)
+						searchProductMenu_sub(choice);
+				}
+				sleep(2000);
+				showProducts();
 			}
+			else
+				searchProductMenu();
 		}
 	}
 
 	
 	static void profileMenu(){
 		boolean run = true;
-		while(run==true) {
+		while(run) {
 			clearScreen();
 			title(1);
 			menu(8);
-			switch(input.next()) {
+			switch(input.nextLine()) {
 
 			case "0":
-				run = false;
 				closeStore();
 				break;
 
 			case "1":
 				System.out.print("\n Enter new username: ");
-				String newUsername = input.next();
+				String newUsername = input.nextLine();
 				user.changeUsername(newUsername);
 				System.out.println("\nRedirecting...");
 				sleep(2000);
@@ -295,11 +343,11 @@ public class Main extends User_Interface{
 			case "2":
 				while(true) {
 					System.out.print("\n Current password: ");
-					String oldPassword = input.next();
+					String oldPassword = input.nextLine();
 					System.out.print("\n New password: ");
-					String newPassword = input.next();
+					String newPassword = input.nextLine();
 					System.out.print("\n New password, again: ");
-					String newPassword2 = input.next();
+					String newPassword2 = input.nextLine();
 					if (user.changePassword(oldPassword, newPassword, newPassword2))
 						break;
 				}
@@ -310,26 +358,27 @@ public class Main extends User_Interface{
 
 			case "8":
 				System.out.println("Password: ");
-				String password = input.next();
+				String password = input.nextLine();
 				if(user.Login(user.getUsername(), password)) {
 					System.out.print("\n Are you sure you want to delete this account? (Y/N): ");
-					String decision = input.next();
+					String decision = input.nextLine();
 					if((decision.equalsIgnoreCase("y"))) {
 						user.removeUser();
 						sleep(3000);
 						mainMenu();
 					}else {
-						sleep(1000);
+						sleep(2000);
 						profileMenu();
 					}}
 				else {
 					System.out.println("Incorrect!");
-					sleep(1000);
+					sleep(2000);
 					profileMenu();
 				}
 				break;
 				
 			case "9":
+				sleep(2000);
 				userMenu();
 				break;
 
@@ -346,12 +395,12 @@ public class Main extends User_Interface{
 
 		boolean run = true;
 
-		while(run==true) {
+		while(run) {
 			clearScreen();
 			title(1);
 			menu(1);
 
-			switch(input.next()) {
+			switch(input.nextLine()) {
 
 			case "0":
 				closeStore();
@@ -359,10 +408,12 @@ public class Main extends User_Interface{
 
 			case "1":
 				run = false;
+				sleep(1000);
 				login("user");
 				break;
 
 			case "2":
+				sleep(1000);
 				user.register();
 				sleep(3000);
 				userMenu();
@@ -370,6 +421,7 @@ public class Main extends User_Interface{
 
 			case "3":
 				run = false;
+				sleep(1000);
 				login("admin");
 
 			case "4":

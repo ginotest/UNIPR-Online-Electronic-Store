@@ -83,7 +83,7 @@ public class User_Interface {
 			System.out.println("                 |   Type 1: Shop Products     |");
 			System.out.println("                  -----------------------------\n");
 			System.out.println("------------------------------\t\t--------------------------------");
-			System.out.println("| Type 7: Go TO CART          |\t\t| Type 8:  Manage Profile         |");
+			System.out.println("| Type 7: Go TO CART          |\t\t| Type 8:  Manage Profile      |");
 			System.out.println("------------------------------\t\t--------------------------------\n");
 			System.out.println("------------------------------\t\t--------------------------------");
 			System.out.println("| Type 9: RETURN TO MAIN MENU |\t\t| Type 0: EXIT                 |");
@@ -105,15 +105,17 @@ public class User_Interface {
 			break;
 			
 		case 7:
+			System.out.print("\n               SEARCH PRODUCTS           \n\n");
 			System.out.println("------------------------------\t\t--------------------------------");
 			System.out.println("| Type 1: by NAME             |\t\t| Type 2: by MANUFACTURER      |");
 			System.out.println("------------------------------\t\t--------------------------------\n");
 			System.out.println("------------------------------\t\t--------------------------------");
-			System.out.println("| Type 3: by HIGHEST PRICE    |\t\t| Type 4: by       |");
+			System.out.println("| Type 3: by HIGHEST PRICE    |\t\t| Type 4: by LOWEST PRICE     |");
 			System.out.println("------------------------------\t\t--------------------------------\n");
 			System.out.println("----------------------------------\t\t--------------------------------");
 			System.out.println("| Type 9: RETURN TO PREVIOUS MENU |\t\t| Type 0: EXIT                 |");
 			System.out.println("----------------------------------\t\t--------------------------------");
+			System.out.print("\nEnter multiple choice separated by space\n");
 			System.out.print("\nWhat do you want to do?  ");
 			break;
 		

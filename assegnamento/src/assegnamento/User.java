@@ -8,14 +8,19 @@ public class User extends ManageData{
 
 	void register() {
 		String [] fields = new String[4];
-		String[] message = {"Name:", "Surname: ", "Username: ", "Password: "};
-
+		String[] message = {"Name: ", "Surname: ", "Username: ", "Password: "};
+		System.out.println();
 		for(int i=0; i<4; i++) {
 			System.out.print(message[i]);
 			fields[i] = input.next();
+			if(i == 2)
+				if(exist("user", fields[i])) {
+					System.out.println("\nUsername already exists\n");
+					i--;
+				}
 		}
-
-		addData("user", fields);
+		addData("user", fields);	
+		User.usernameLogged = fields[2];
 	}
 
 	boolean Login(String username, String password) {
@@ -35,9 +40,12 @@ public class User extends ManageData{
 
 		System.out.format("%-25s%-25s%-25s","\tNAME", "MANUFACTURER", "PRICE");
 		System.out.println("\n------------------------------------------------------------------");
-		readAll("product");
-		printProducts();
+		printList();
 
+	}
+	
+	void readProducts() {
+		readAll("product");
 	}
 
 	void removeUser(){
@@ -73,5 +81,28 @@ public class User extends ManageData{
 			return false;
 		}
 
+	}
+
+	 void searchProducts(String type, String str) {
+		 switch(type) {
+		 case "name":
+			 filterList(1, str);
+			 break;
+			 
+		 case "manufacturer":
+			 filterList(2, str);
+			 break;
+			 
+		 case "highestPrice":
+			 filterList(3, str);
+			 break;
+			 
+		 case "lowestPrice":
+			 filterList(4, str);
+			 break;
+			 
+		default:
+			break;
+		 }
 	}
 }

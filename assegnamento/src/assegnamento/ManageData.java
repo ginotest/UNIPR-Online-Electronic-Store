@@ -15,10 +15,11 @@ public abstract class ManageData {
 	private static String password;
 	private static String isAdmin;
 	private static ArrayList<String> array;
-	private static ArrayList<ArrayList<String>> elements;
 	private static String[] files= {"employees.xml", "products.xml", "users.xml"};
 	private static String[] users = {"name", "surname", "username", "password"};
 	private static String[] product = {"id", "name", "manufacturer", "price", "quantity"};
+	
+	protected static ArrayList<ArrayList<String>> elements;
 
 
 	public static void addData(String type, String[] content)  {
@@ -154,7 +155,7 @@ public abstract class ManageData {
 
 	}
 
-	public ArrayList<ArrayList<String>> readAll(String type){
+	public static ArrayList<ArrayList<String>> readAll(String type){
 		String xFile = "";
 		int idx =0;
 		if(type == "user") {
@@ -204,16 +205,6 @@ public abstract class ManageData {
 		return elements;
 	}
 
-	public void printProducts(){
-		for (int i = 0; i < elements.size(); i++) {
-			System.out.print("\n" + (i+1) + ")  ");
-			for (int j = 1; j < elements.get(i).size(); j++) 
-				System.out.format("%-25s",elements.get(i).get(j));
-			System.out.println();
-		}
-		System.out.println();
-		
-	} 
 	
 	public static ArrayList<String> getAdmin(){
 
@@ -362,8 +353,42 @@ public abstract class ManageData {
 		return false;
 
 	}
+	
+	
+	public static void filterList(int index, String str) {
+		ArrayList<ArrayList<String>> temp = new ArrayList<ArrayList<String>>();
+		for (int i = 0; i < elements.size(); i++) {
+			if(index == 3) {
+				if(Float.parseFloat(elements.get(i).get(index).substring(1)) < Float.parseFloat(str))
+					temp.add(elements.get(i));
+			}
+			else if(index == 4) {
+				if(Float.parseFloat(elements.get(i).get(index-1).substring(1)) > Float.parseFloat(str))
+					temp.add(elements.get(i));
+			}
+			else {
+				if((elements.get(i).get(index)).toLowerCase().contains(str.toLowerCase()))
+					temp.add(elements.get(i));
+			}
+		} 
+		elements = new ArrayList<ArrayList<String>>();
+		elements = temp;
+	}
 
 
+	public void printList(){
+		if(elements.size() == 0) {
+			System.out.print("\nNo Result\n");
+			return;
+		}
+		for (int i = 0; i < elements.size(); i++) {
+			System.out.print("\n" + (i+1) + ")  ");
+			for (int j = 1; j < elements.get(i).size(); j++) 
+				System.out.format("%-25s",elements.get(i).get(j));
+			System.out.println();
+		}
+		System.out.println();	
+	} 
 }
 
 

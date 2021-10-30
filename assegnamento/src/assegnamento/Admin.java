@@ -20,7 +20,7 @@ public class Admin extends ManageData{
 	void add(String type) {
 		int select = 0;
 		String [] fields = new String[5];
-		String[][] message = {{"Name:", "Surname: ", "Username: ", "Password: ", "Admin: "},{"ID: ", "Name Product: ", "Manufacturer: ", "Price (USD): ", "Quantity: " }};
+		String[][] message = {{"Name:", "Surname: ", "Username: ", "Password: ", "Admin: "},{"ID: ", "Name Product: ", "Manufacturer: ", "Price (USD): "}};
 		
 		if(type=="employee") {
 			select=0;
@@ -30,7 +30,7 @@ public class Admin extends ManageData{
 		}
 		
 		
-		for(int i=0; i<5; i++) {
+		for(int i=0; i < message[select].length ; i++) {
 			System.out.print(message[select][i]);
 			fields[i] = input.nextLine();
 		}

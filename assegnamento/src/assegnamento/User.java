@@ -1,5 +1,6 @@
 package assegnamento;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class User extends ManageData{
@@ -44,6 +45,41 @@ public class User extends ManageData{
 
 	}
 	
+	void order(){
+		placeOrder(User.usernameLogged);
+	}
+	
+	void changeQuantity(){
+		System.out.print("Which product? " );
+		int id = input.nextInt();
+		System.out.print("Enter the new quantity: " );
+		int newQuantity = input.nextInt();
+		editQuantity(User.usernameLogged, id, newQuantity);
+	}
+	
+	void removeProduct(){
+		System.out.print("Which product? " );
+		int id = input.nextInt();
+		if(id == 1)
+			id--;
+		removeFromCart(User.usernameLogged, id);
+	}
+	
+	void cart() {
+		readProducts();
+		showCart(User.usernameLogged);
+	}
+	
+	void addToCart() {
+		System.out.print("Which product? : ");
+		int selection = input.nextInt()-1;
+		System.out.print("How many? ");
+		int quantity = input.nextInt();
+		ArrayList<ArrayList<String>> product = getElements();
+		System.out.println("You have added: " + quantity + " " + product.get(selection).get(1) + " to the cart.");
+		editData("user", 4, usernameLogged, product.get(selection).get(0) + "," + quantity);
+	}
+	
 	void readProducts() {
 		readAll("product");
 	}
@@ -60,6 +96,12 @@ public class User extends ManageData{
 		}
 		else
 			System.out.println("Username already exists");
+	}
+	
+	void setAddress(String newAddress){
+			editData("user", 5, usernameLogged, newAddress);
+			User.usernameLogged = newAddress;
+			System.out.println("The address has been set!");
 	}
 
 	boolean changePassword(String oldPassword, String newPassword, String newPassword2){

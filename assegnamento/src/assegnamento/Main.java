@@ -4,8 +4,6 @@ package assegnamento;
 public class Main extends User_Interface{
 	static Admin admin = new Admin();
 	static User user = new User();
-	static User userLogged;
-
 
 	static void closeStore() {
 		clearScreen();
@@ -197,6 +195,11 @@ public class Main extends User_Interface{
 				showProducts();
 				break;
 
+			case "7":
+				sleep(1500);
+				cartMenu();
+				break;
+				
 			case "8":
 				sleep(1500);
 				profileMenu();
@@ -226,14 +229,24 @@ public class Main extends User_Interface{
 				break;
 
 			case "1":
-
+				user.addToCart();
+				sleep(2000);
+				clearScreen();
+				showProducts();
+				userMenu();
+				sleep(2000);
 				break;
 
 			case "2":
 				sleep(1000);
 				searchProductMenu();
 				break;
-
+				
+			case "7":
+				sleep(1500);
+				cartMenu();
+				break;
+				
 			case "9":
 				sleep(2000);
 				userMenu();
@@ -247,6 +260,47 @@ public class Main extends User_Interface{
 		}
 	}
 	
+	static void cartMenu() {
+		boolean run = true;
+		while(run) {
+			clearScreen();
+			title(3);
+			user.cart();
+			menu(9);
+			switch(input.nextLine()) {
+
+			case "0":
+				user.readProducts();
+				sleep(2000);
+				showProducts();
+				break;
+
+			case "1":
+				user.removeProduct();
+				cartMenu();
+				sleep(2000);
+				break;
+
+			case "2":
+				sleep(1000);
+				user.changeQuantity();
+				cartMenu();
+				sleep(2000);
+				break;
+
+			case "9":
+				sleep(2000);
+				user.order();
+				sleep(2000);
+				break;
+
+			default:
+				unavailable();
+				cartMenu();
+				break;
+			}
+		}
+	}
 	
 	
 	static void searchProductMenu_sub(String choice) {
@@ -340,6 +394,7 @@ public class Main extends User_Interface{
 				sleep(2000);
 				userMenu();
 				break;
+				
 			case "2":
 				while(true) {
 					System.out.print("\n Current password: ");
@@ -355,7 +410,16 @@ public class Main extends User_Interface{
 				sleep(2000);
 				userMenu();
 				break;
-
+				
+			case "3":
+				System.out.print("\n Enter your address: ");
+				String newAddress = input.nextLine();
+				user.setAddress(newAddress);
+				System.out.println("\nRedirecting...");
+				sleep(2000);
+				userMenu();
+				break;
+				
 			case "8":
 				System.out.println("Password: ");
 				String password = input.nextLine();

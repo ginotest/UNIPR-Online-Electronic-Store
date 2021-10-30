@@ -36,6 +36,14 @@ public class User_Interface {
 			System.out.println("  / ____ | (_| | | | | | | | | | |  / ____ \\| | |  __| (_| |");
 			System.out.println(" /_/    \\_\\__,_|_| |_| |_|_|_| |_| /_/    \\_|_|  \\___|\\__,_|\n");
 			break;
+		case 3:
+			System.out.println("\t\t\t   _____          _____ _______ ");
+			System.out.println("\t\t\t  / ____|   /\\   |  __ \\__   __|");
+			System.out.println("\t\t\t | |       /  \\  | |__) | | |   ");
+			System.out.println("\t\t\t | |      / /\\ \\ |  _  /  | |   ");
+			System.out.println("\t\t\t | |____ / ____ \\| | \\ \\  | |   ");
+			System.out.println("\t\t\t  \\_____/_/    \\_\\_|  \\_\\ |_|   \n");
+			break;
 		}
 		
 	}  
@@ -121,14 +129,23 @@ public class User_Interface {
 		
 		case 8:
 			System.out.println("------------------------------\t\t--------------------------------");
-			System.out.println("| Type 1: change USERNAME     |\t\t| Type 2: change PASSWORD      |");
+			System.out.println("| Type 1: change USERNAME    |\t\t| Type 2: change PASSWORD      |");
 			System.out.println("------------------------------\t\t--------------------------------");
-			System.out.println("                 --------------------------        ");
-			System.out.println("                 | Type 8: DELETE ACCOUNT |        ");
-			System.out.println("                 --------------------------        ");
+			System.out.println("------------------------------\t\t--------------------------------");
+			System.out.println("| Type 3: set ADDRESS        |\t\t| Type 8: DELETE ACCOUNT       |");
+			System.out.println("------------------------------\t\t--------------------------------\n");
 			System.out.println("----------------------------------\t\t--------------------------------");
 			System.out.println("| Type 9: RETURN TO PREVIOUS MENU |\t\t| Type 0: EXIT                 |");
 			System.out.println("----------------------------------\t\t--------------------------------");
+			System.out.print("\nWhat do you want to do?  ");
+			break;
+		case 9:
+			System.out.println("------------------------------\t\t----------------------------------");
+			System.out.println("| Type 1: Remove product     |\t\t|   Type 2: Change quantity      |");
+			System.out.println("------------------------------\t\t----------------------------------\n");
+			System.out.println("------------------------------\t\t-----------------------------------");
+			System.out.println("| Type 9: Order              |\t\t|   Type 0: BACK                 |");
+			System.out.println("------------------------------\t\t-----------------------------------");
 			System.out.print("\nWhat do you want to do?  ");
 			break;
 		}

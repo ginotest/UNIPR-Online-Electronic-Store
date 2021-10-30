@@ -5,20 +5,31 @@
         <surname>kingsley</surname>
         <username>vane</username>
         <password>1234</password>
-        <cart/>
+        <address>Via Montanare 43</address>
+        <cart>none</cart>
     </user>
     <user>
         <name>Giuggiolino</name>
         <surname>Piattola</surname>
         <username>Giupi1234</username>
         <password>imonperiod</password>
-        <cart/>
+        <address>none</address>
+        <cart>none</cart>
     </user>
     <user>
         <name>a</name>
         <surname>aaadv</surname>
         <username>a</username>
         <password>a</password>
-        <cart/>
+        <address>Via delle patatoncole quarantordici</address>
+        <cart>none</cart>
+    </user>
+    <user>
+        <name>Andrew</name>
+        <surname>Lodero</surname>
+        <username>Allo134</username>
+        <password>password</password>
+        <address>none</address>
+        <cart>none</cart>
     </user>
 </users>

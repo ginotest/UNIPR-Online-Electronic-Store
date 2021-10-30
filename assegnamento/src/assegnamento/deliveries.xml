@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<deliveries>
+    <delivery>
+        <id>#4582</id>
+        <name>vanessa kingsley</name>
+        <address>Via Montanare 43</address>
+        <cart>55,2</cart>
+    </delivery>
+    <delivery>
+        <id>#176</id>
+        <name>a aaadv</name>
+        <address>Via delle patatoncole quarantordici</address>
+        <cart>1276,2,12,3,55,3</cart>
+    </delivery>
+</deliveries>

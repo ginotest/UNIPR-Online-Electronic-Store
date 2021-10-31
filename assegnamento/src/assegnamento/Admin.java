@@ -11,9 +11,11 @@ public class Admin extends ManageData{
 	
 	
 	boolean login(String username, String password) {
-		admin = getAdmin();
-		if(admin.get(0).equals("true") && admin.get(1).equals(username) && admin.get(2).equals(password))
+		admin = getProfile("employee", username);
+		if(admin.get(1).equals(password) && admin.get(2).equals("true"))
 			return true;
+		else
+			admin.clear();
 		return false;
 	}
 	

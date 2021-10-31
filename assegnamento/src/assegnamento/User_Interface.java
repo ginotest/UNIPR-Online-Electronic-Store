@@ -100,15 +100,15 @@ public class User_Interface {
 			break;
 			
 		case 6:
-			System.out.println("                  -----------------------------------");
-			System.out.println("                 |   Type 1: Add Product to Cart     |");
-			System.out.println("                  -----------------------------------\n");
-			System.out.println("------------------------------\t\t------------------------");
-			System.out.println("| Type 2: Search Product     |\t\t| Type 7: GO TO CART    |");
-			System.out.println("------------------------------\t\t------------------------\n");
-			System.out.println("----------------------------------\t\t--------------------------------");
-			System.out.println("| Type 9: RETURN TO PREVIOUS MENU |\t\t| Type 0: EXIT                 |");
-			System.out.println("----------------------------------\t\t--------------------------------");
+			System.out.println("--------------------------------\t------------------------------");
+			System.out.println("| Type 1: Add Product to Cart  |\t| Type 2: Show all Products  |");
+			System.out.println("--------------------------------\t------------------------------\n");
+			System.out.println("--------------------------------\t------------------------");
+			System.out.println("| Type 3: Search Product       |\t| Type 7: GO TO CART    |");
+			System.out.println("--------------------------------\t------------------------\n");
+			System.out.println("--------------------------------\t------------------");
+			System.out.println("| Type 9: RETURN TO MAIN MENU  |\t| Type 0: EXIT   |");
+			System.out.println("--------------------------------\t------------------");
 			System.out.print("\nWhat do you want to do?  ");
 			break;
 			
@@ -134,18 +134,42 @@ public class User_Interface {
 			System.out.println("------------------------------\t\t--------------------------------");
 			System.out.println("| Type 3: set ADDRESS        |\t\t| Type 8: DELETE ACCOUNT       |");
 			System.out.println("------------------------------\t\t--------------------------------\n");
-			System.out.println("----------------------------------\t\t--------------------------------");
-			System.out.println("| Type 9: RETURN TO PREVIOUS MENU |\t\t| Type 0: EXIT                 |");
-			System.out.println("----------------------------------\t\t--------------------------------");
+			System.out.println("----------------------------------\t\t--------------------");
+			System.out.println("| Type 9: RETURN TO PREVIOUS MENU |\t\t| Type 0: EXIT     |");
+			System.out.println("----------------------------------\t\t--------------------");
 			System.out.print("\nWhat do you want to do?  ");
 			break;
+			
 		case 9:
 			System.out.println("------------------------------\t\t----------------------------------");
 			System.out.println("| Type 1: Remove product     |\t\t|   Type 2: Change quantity      |");
 			System.out.println("------------------------------\t\t----------------------------------\n");
-			System.out.println("------------------------------\t\t-----------------------------------");
-			System.out.println("| Type 9: Order              |\t\t|   Type 0: BACK                 |");
-			System.out.println("------------------------------\t\t-----------------------------------");
+			System.out.println("                         ------------------------");
+			System.out.println("                        |   Type 5: Place Order  |");
+			System.out.println("                         ------------------------\n");
+			System.out.println("-----------------------------------\t\t----------------------");
+			System.out.println("| Type 9: RETURN TO PREVIOUS MENU  |\t\t|   Type 0: EXIT     |");
+			System.out.println("-----------------------------------\t\t----------------------");
+			System.out.print("\nWhat do you want to do?  ");
+			break;
+			
+		case 10:
+			System.out.println("----------------------------\t-----------------------------");
+			System.out.println("| Type 1: Orders to Ship   |\t|   Type 2: Notifications   |");
+			System.out.println("----------------------------\t-----------------------------\n");
+			System.out.println("---------------------------\t----------------------");
+			System.out.println("| Type 9: RETURN TO HOME  |\t|   Type 0: EXIT     |");
+			System.out.println("---------------------------\t----------------------");
+			System.out.print("\nWhat do you want to do?  ");
+			break;
+			
+		case 11:
+			System.out.println("               ----------------------------");
+			System.out.println("              |   Type 1: Restock Product  |");
+			System.out.println("               ----------------------------\n");
+			System.out.println("---------------------------\t----------------------");
+			System.out.println("| Type 9: RETURN TO HOME  |\t|   Type 0: EXIT     |");
+			System.out.println("---------------------------\t----------------------");
 			System.out.print("\nWhat do you want to do?  ");
 			break;
 		}

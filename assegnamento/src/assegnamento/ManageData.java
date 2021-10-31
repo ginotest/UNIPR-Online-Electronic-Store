@@ -34,6 +34,7 @@ public abstract class ManageData {
 	private static String[] delivery = {"id", "name", "address", "cart"};
 
 	protected static ArrayList<ArrayList<String>> elements;
+
 	public static ArrayList<ArrayList<String>> getElements(){
 		return ManageData.elements;
 	}
@@ -110,7 +111,7 @@ public abstract class ManageData {
 	}
 
 
-	public static void removeData(String type, String deletedElement) {
+	public static void removeData(String type, String elementToDelete) {
 		try {
 
 			String[][]  data = {{"employee", "product", "user"},{ "username", "id", "username"}};
@@ -143,7 +144,7 @@ public abstract class ManageData {
 				Element person = (Element)nodes.item(i);
 				Element name = (Element)person.getElementsByTagName(data[1][selectType].toString()).item(0);
 				String pName = name.getTextContent();
-				if (pName.equals(deletedElement)) {
+				if (pName.equals(elementToDelete)) {
 					person.getParentNode().removeChild(person);
 
 				}
@@ -268,10 +269,17 @@ public abstract class ManageData {
 		return elements;
 	}
 
-
-	public static ArrayList<String> getAdmin(){
-
-		String xFile = files[0];
+	public static ArrayList<String> getProfile(String type, String usrn){
+		String xFile = "";
+		if(type == "user") {
+			xFile = files[2];
+		}
+		else if(type == "product") {
+			xFile = files[1];
+		}
+		else if(type == "employee") {
+			xFile = files[0];
+		}
 		Document dom;
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		try {
@@ -279,26 +287,31 @@ public abstract class ManageData {
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			dom = db.parse(".\\src\\assegnamento\\"+xFile);
 			Element doc = dom.getDocumentElement();
-
+			
 			array = new ArrayList<String>();
-
-
-			isAdmin = getTextValue(isAdmin, doc, "admin", 0);
-			if (isAdmin != null) {
-				if (!isAdmin.isEmpty())
-					array.add(isAdmin);
-			}
-
-			username = getTextValue(username, doc, "username", 0);
-			if (username != null) {
-				if (!username.isEmpty())
+			for (int i = 0; i < doc.getElementsByTagName(type).getLength(); i++) {
+				
+				username = getTextValue(username, doc, "username", i);
+				
+				if((username != null) && (!username.isEmpty()) && (username.equals(usrn))) {
 					array.add(username);
-			}
-
-			password = getTextValue(password, doc, "password", 0);
-			if ( password != null) {
-				if (!password.isEmpty())
-					array.add(password);
+					
+					password = getTextValue(password, doc, "password", i);
+					if ( password != null) {
+						if (!password.isEmpty())
+							array.add(password);
+					}
+					
+					if(type != "user") {
+						isAdmin = getTextValue(isAdmin, doc, "admin", i);
+						if (isAdmin != null) {
+							if (!isAdmin.isEmpty())
+								array.add(isAdmin);
+						}
+					}
+					
+					return array;
+				}
 			}
 
 		} catch (Exception e)    {
@@ -308,28 +321,6 @@ public abstract class ManageData {
 		return array;
 	}
 
-	public static String getPassword(String type, String usern){
-		String xFile = "";
-		if(type == "user") {
-			xFile = files[2];
-		}
-		else if(type == "employee") {
-			xFile = files[0];
-		}
-
-		Element doc = docBuilder(xFile);
-
-		for (int i = 0; i < doc.getElementsByTagName(type).getLength(); i++) {
-			username = getTextValue(username, doc, "username", i);
-			if ((username != null) && (!username.isEmpty()) && (username.equals(usern))) {
-				password = getTextValue(password, doc, "password", i);
-				if (( password != null) && (!password.isEmpty())) 
-					return password;
-			}
-		}
-
-		return null;
-	}
 
 	public static Element docBuilder(String file) {
 
@@ -381,6 +372,7 @@ public abstract class ManageData {
 			e.printStackTrace();  
 		} 
 	}
+	
 	public static void save(Element doc, String output) {
 
 		try {
@@ -553,7 +545,7 @@ public abstract class ManageData {
 					}
 				}
 				else {
-					System.out.println("\nThe products will be sent to " + order[2]);
+					System.out.println("\nThe products will be shipped to '" + order[2] + "'");
 					System.out.print("\nDo you want to send them to this address? (Y/N): ");
 					decision = input.nextLine();
 					if((!decision.equalsIgnoreCase("y"))) {
@@ -567,6 +559,7 @@ public abstract class ManageData {
 						}
 					}
 				}
+				System.out.println("\nOrder confrimed to address '" + order[2] + "'");
 				products = new ArrayList <> (Arrays.asList(order[3].split(",")));
 				break;		
 			}
@@ -632,7 +625,7 @@ public abstract class ManageData {
 		}
 		for (int i = 0; i < elements.size(); i++) {
 			System.out.print("\n" + (i+1) + ")  ");
-			for (int j = 1; j < elements.get(i).size(); j++) 
+			for (int j = 1; j < elements.get(i).size()-1; j++) 
 				System.out.format("%-25s",elements.get(i).get(j));
 			System.out.println();
 		}

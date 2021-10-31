@@ -29,9 +29,10 @@ public abstract class ManageData {
 
 
 	private static String[] files= {"employees.xml", "products.xml", "users.xml", "deliveries.xml"};
-	private static String[] users = {"name", "surname", "username", "password"};
+	private static String[] users = {"name", "surname", "username", "password", "address", "cart"};
 	private static String[] product = {"id", "name", "manufacturer", "price", "quantity"};
 	private static String[] delivery = {"id", "name", "address", "cart"};
+	private static String[] employees = {"name", "surname", "username", "password", "admin"};
 
 	protected static ArrayList<ArrayList<String>> elements;
 
@@ -210,12 +211,15 @@ public abstract class ManageData {
 			xFile = files[2];
 		}
 		else if(type == "product") {
-			xFile = files[1]; idx =1;
+			xFile = files[1]; idx=1;
 		}
 		else if(type == "employee") {
-			xFile = files[0];
+			xFile = files[0]; idx=3;
 		}
-		String[][] xElements= {users, product};
+		else if(type == "delivery") {
+			xFile = files[3]; idx=2;
+		}
+		String[][] xElements= {users, product, delivery, employees};
 
 		Element doc = docBuilder(xFile);
 
@@ -224,6 +228,7 @@ public abstract class ManageData {
 			array = new ArrayList<String>();
 
 			for (int j = 0; j < 5; j++) {
+				if ((type != "delivery")|| ((type == "delivery" )  && j < 4) )
 				data = getTextValue(data, doc, xElements[idx][j], i);
 				if (data != null) {
 					if (!data.isEmpty()) {
@@ -254,8 +259,8 @@ public abstract class ManageData {
 				}
 			}
 
-			if(type == "employee") {
-				isAdmin = getTextValue(isAdmin, doc, "admin", i);
+			if(type == "user") {
+				isAdmin = getTextValue(isAdmin, doc, "cart", i);
 				if (isAdmin != null) {
 					if (!isAdmin.isEmpty())
 						array.add(isAdmin);

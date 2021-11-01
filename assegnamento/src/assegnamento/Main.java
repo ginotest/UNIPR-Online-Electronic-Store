@@ -9,7 +9,7 @@ public class Main extends User_Interface{
 	static void closeStore() {
 		clearScreen();
 		System.exit(0);
-	}
+	} 
 
 	static void sleep(int sec) {
 		try {

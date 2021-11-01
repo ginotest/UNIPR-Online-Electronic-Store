@@ -172,6 +172,12 @@ public class User_Interface {
 			System.out.println("---------------------------\t----------------------");
 			System.out.print("\nWhat do you want to do?  ");
 			break;
+			
+		case 12:
+			System.out.println("------------------------\t-----------------------------------");
+			System.out.println("| Type 1: Ship Product |\t| Type 9: RETURN TO PREVIOUS MENU |");
+			System.out.println("------------------------\t-----------------------------------");
+			System.out.print("\nWhat do you want to do?  ");	
 		}
 		
 	}

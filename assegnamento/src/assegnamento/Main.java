@@ -95,21 +95,55 @@ public class Main extends User_Interface{
 
 			case "1":
 				sleep(2000);
+				clearScreen();
+				employee.readOrders();
+				employee.showOrders();
+				ordersMenu();
 				break;
 
 			case "2":
 				sleep(1500);
-				notificationMenu();
+				clearScreen();
+				if(employee.showNotification())
+					notificationMenu();
+				else
+					sleep(4000);
 				break;
 
 			case "9":
 				sleep(2000);
-				mainMenu();
+				employeeMenu();
 				break;
 
 			default:
 				unavailable();
-				mainMenu();
+				employeeMenu();
+				break;
+			}
+		}
+	}
+
+	private static void ordersMenu() {
+		boolean run = true;
+		while(run) {
+			menu(12);
+			switch(input.nextLine()) {
+
+			case "1":
+				sleep(1000);
+				System.out.print("\nWhat number do you want to ship? ");
+				String select = input.nextLine();
+				employee.shipProduct(Integer.parseInt(select));
+				sleep(5000);
+
+			case "9":
+				sleep(2000);
+				employeeMenu();
+				break;
+
+			default:
+				unavailable();
+				employeeMenu();
 				break;
 			}
 		}
@@ -118,8 +152,6 @@ public class Main extends User_Interface{
 	private static void notificationMenu() {
 		boolean run = true;
 		while(run) {
-			clearScreen();
-			title(1);
 			menu(11);
 			switch(input.nextLine()) {
 
@@ -129,16 +161,21 @@ public class Main extends User_Interface{
 
 			case "1":
 				sleep(2000);
+				System.out.print("\nWhat number do you want to Restock? ");
+				String select = input.nextLine();
+				System.out.print("\nQuantity? ");
+				int quantity =  input.nextInt();
+				employee.restock(Integer.parseInt(select), quantity);
 				break;
 
 			case "9":
 				sleep(2000);
-				mainMenu();
+				employeeMenu();
 				break;
 
 			default:
 				unavailable();
-				employeeMenu();
+				notificationMenu();
 				break;
 			}
 		}

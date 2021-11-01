@@ -35,6 +35,12 @@ public abstract class ManageData {
 	private static String[] employees = {"name", "surname", "username", "password", "admin"};
 
 	protected static ArrayList<ArrayList<String>> elements;
+	protected static ArrayList<String>productsToRestock;
+	
+	
+	public ManageData() {
+		productsToRestock = new ArrayList<String>();
+	}
 
 	public static ArrayList<ArrayList<String>> getElements(){
 		return ManageData.elements;
@@ -115,7 +121,7 @@ public abstract class ManageData {
 	public static void removeData(String type, String elementToDelete) {
 		try {
 
-			String[][]  data = {{"employee", "product", "user"},{ "username", "id", "username"}};
+			String[][]  data = {{"employee", "product", "user", "delivery"},{ "username", "id","username", "id"}};
 			int selectType = 0;
 			String xFile ="";
 
@@ -130,6 +136,10 @@ public abstract class ManageData {
 			else if(type == "user") {
 				xFile = files[2];
 				selectType=2;
+			}
+			else if(type == "delivery") {
+				xFile = files[3];
+				selectType=3;
 			}
 
 			File file = new File(".\\src\\assegnamento\\" + xFile);
@@ -158,7 +168,7 @@ public abstract class ManageData {
 		}
 	}
 
-	public static void editData(String type, int option, String select, String content) {
+	public static boolean editData(String type, int option, String select, String content) {
 		String xFile = "";
 		int idx = 0;
 		String[][] xElement = {{"username", "password", "name", "surname", "admin"},{"id", "name", "manufacturer", "price", "quantity" }, {"username", "password", "name", "surname", "cart","address"}};
@@ -175,12 +185,12 @@ public abstract class ManageData {
 
 		Element doc = docBuilder(xFile);
 		for (int i = 0; i < doc.getElementsByTagName(type).getLength(); i++) {
-			username = getTextValue(username, doc, xElement[idx][0], i);
+			username = getTextValue(doc, xElement[idx][0], i);
 			if (username != null && !username.isEmpty() && username.equals(select)) {
 				if(xElement[idx][option] != "cart")
 					setTextValue(doc, xElement[idx][option], i, content, xFile);
 				else {
-					cart = getTextValue(cart, doc, xElement[idx][option], i);
+					cart = getTextValue(doc, xElement[idx][option], i);
 					if(cart.equals("none")) {
 						setTextValue(doc, xElement[idx][option], i, content, xFile);
 					}
@@ -193,9 +203,10 @@ public abstract class ManageData {
 
 
 				}
+				return true;
 			}
 		}
-
+		return false;
 	}
 
 	public static ArrayList<ArrayList<String>> readAll(String type){
@@ -229,41 +240,45 @@ public abstract class ManageData {
 
 			for (int j = 0; j < 5; j++) {
 				if ((type != "delivery")|| ((type == "delivery" )  && j < 4) )
-				data = getTextValue(data, doc, xElements[idx][j], i);
-				if (data != null) {
-					if (!data.isEmpty()) {
-						if(type == "product" && xElements[idx][j].equals("id")) {
-							array.add(data);
-							cids.add(data);
-						}
-						else if(type == "product" && xElements[idx][j].equals("name")) {
-							array.add(data);
-							cnames.add(data);
-						}
-						else if(type == "product" && xElements[idx][j].equals("manufacturer")) {
-							array.add(data);
-							cmanufacturers.add(data);
-						}
-						else if(type == "product" && xElements[idx][j].equals("price")) {
-							array.add("$"+ data);
-							cprices.add(data);
-						}
-						else if(type == "product" && xElements[idx][j].equals("quantity")) {
-							array.add(data);
-							cquantities.add(data);
-						}
-						else
-							array.add(data);
+				data = getTextValue(doc, xElements[idx][j], i);
+				if ((data != null) && (!data.isEmpty())) {
+					if(type == "product" && xElements[idx][j].equals("id")) {
+						array.add(data);
+						cids.add(data);
 					}
+					else if(type == "product" && xElements[idx][j].equals("name")) {
+						array.add(data);
+						cnames.add(data);
+					}
+					else if(type == "product" && xElements[idx][j].equals("manufacturer")) {
+						array.add(data);
+						cmanufacturers.add(data);
+					}
+					else if(type == "product" && xElements[idx][j].equals("price")) {
+						array.add("$"+ data);
+						cprices.add(data);
+					}
+					else if(type == "product" && xElements[idx][j].equals("quantity")) {
+						array.add(data);
+						cquantities.add(data);
+					}
+					else
+						array.add(data);
 
+				}
+			}
+			
+			if(type == "employee") {
+				isAdmin = getTextValue(doc, "admin", i);
+				if ((isAdmin != null) && (!isAdmin.isEmpty())) {
+						array.add(isAdmin);
 				}
 			}
 
 			if(type == "user") {
-				isAdmin = getTextValue(isAdmin, doc, "cart", i);
-				if (isAdmin != null) {
-					if (!isAdmin.isEmpty())
-						array.add(isAdmin);
+				cart = getTextValue(doc, "cart", i);
+				if ((cart != null) && (!cart.isEmpty())){
+						array.add(cart);
 				}
 			}
 
@@ -296,19 +311,19 @@ public abstract class ManageData {
 			array = new ArrayList<String>();
 			for (int i = 0; i < doc.getElementsByTagName(type).getLength(); i++) {
 				
-				username = getTextValue(username, doc, "username", i);
+				username = getTextValue(doc, "username", i);
 				
 				if((username != null) && (!username.isEmpty()) && (username.equals(usrn))) {
 					array.add(username);
 					
-					password = getTextValue(password, doc, "password", i);
+					password = getTextValue(doc, "password", i);
 					if ( password != null) {
 						if (!password.isEmpty())
 							array.add(password);
 					}
 					
 					if(type != "user") {
-						isAdmin = getTextValue(isAdmin, doc, "admin", i);
+						isAdmin = getTextValue(doc, "admin", i);
 						if (isAdmin != null) {
 							if (!isAdmin.isEmpty())
 								array.add(isAdmin);
@@ -340,9 +355,9 @@ public abstract class ManageData {
 		return dom.getDocumentElement();
 	}
 
-	static String getTextValue(String def, Element doc, String tag, int index) {
+	static String getTextValue(Element doc, String tag, int index) {
 
-		String value = def;
+		String value = "";
 		NodeList nl;
 		nl = doc.getElementsByTagName(tag);
 
@@ -406,7 +421,7 @@ public abstract class ManageData {
 		Element doc = docBuilder(xFile);
 
 		for (int i = 0; i < doc.getElementsByTagName(type).getLength(); i++) {
-			username = getTextValue(username, doc, id, i);
+			username = getTextValue(doc, id, i);
 			if (username != null && !username.isEmpty() && username.equals(select)) {	
 				return true;}
 		}
@@ -426,9 +441,9 @@ public abstract class ManageData {
 		Element doc = docBuilder(xFile);
 
 		for (int i = 0; i < doc.getElementsByTagName("user").getLength(); i++) {
-			username = getTextValue(username, doc, "username", i);
+			username = getTextValue(doc, "username", i);
 			if (username != null && !username.isEmpty() && username.equals(user)) {
-				products = new ArrayList <> (Arrays.asList(getTextValue(username, doc, "cart", i).split(",")));
+				products = new ArrayList <> (Arrays.asList(getTextValue(doc, "cart", i).split(",")));
 				break;
 			}
 
@@ -459,9 +474,9 @@ public abstract class ManageData {
 		Element doc = docBuilder(xFile);
 
 		for (int i = 0; i < doc.getElementsByTagName("user").getLength(); i++) {
-			username = getTextValue(username, doc, "username", i);
+			username = getTextValue(doc, "username", i);
 			if (username != null && !username.isEmpty() && username.equals(user)) {
-				products = new ArrayList <> (Arrays.asList(getTextValue(username, doc, "cart", i).split(",")));
+				products = new ArrayList <> (Arrays.asList(getTextValue(doc, "cart", i).split(",")));
 				break;
 			}
 
@@ -492,9 +507,9 @@ public abstract class ManageData {
 		Element doc = docBuilder(xFile);
 
 		for (int i = 0; i < doc.getElementsByTagName("user").getLength(); i++) {
-			username = getTextValue(username, doc, "username", i);
+			username = getTextValue(doc, "username", i);
 			if (username != null && !username.isEmpty() && username.equals(user)) {
-				products = new ArrayList <> (Arrays.asList(getTextValue(username, doc, "cart", i).split(",")));
+				products = new ArrayList <> (Arrays.asList(getTextValue(doc, "cart", i).split(",")));
 				break;
 			}
 
@@ -530,11 +545,11 @@ public abstract class ManageData {
 		Element doc = docBuilder(xFile);
 
 		for (int i = 0; i < doc.getElementsByTagName("user").getLength(); i++) {
-			username = getTextValue(username, doc, "username", i);
+			username = getTextValue(doc, "username", i);
 			if (username != null && !username.isEmpty() && username.equals(user)) {
-				order[1] = getTextValue(username, doc, "name", i) + " " + getTextValue(username, doc, "surname", i);
-				order[2] = getTextValue(username, doc, "address", i);
-				order[3] = getTextValue(username, doc, "cart", i);
+				order[1] = getTextValue(doc, "name", i) + " " + getTextValue(doc, "surname", i);
+				order[2] = getTextValue(doc, "address", i);
+				order[3] = getTextValue(doc, "cart", i);
 				if (order[3].equals("none")) {
 					System.out.println("The cart is empty! Please add something to the cart.");
 					return;
@@ -578,7 +593,7 @@ public abstract class ManageData {
 		order[0] = "#"+Integer.toString(tempID);
 
 
-		Element doc2 = docBuilder("products.xml");
+		Element doc2 = docBuilder(files[1]);
 
 		for(int i = 0; i < products.size();i++) {
 
@@ -588,10 +603,14 @@ public abstract class ManageData {
 			}
 			else {
 				for (int j = 0; j < doc2.getElementsByTagName("product").getLength(); j++) {
-					username = getTextValue(username, doc2, "id", j);
-					if (username != null && !username.isEmpty() && username.equals(id)) {
-						quantity = Integer.parseInt(getTextValue(username, doc2, "quantity", j));
-						setTextValue(doc2, "quantity", j, Integer.toString(quantity - Integer.parseInt(products.get(i))), "products.xml");
+					id = getTextValue(doc2, "id", j);
+					if (id != null && !id.isEmpty() && id.equals(id)) {
+						quantity = Integer.parseInt(getTextValue(doc2, "quantity", j));
+						quantity = quantity - Integer.parseInt(products.get(i));
+						setTextValue(doc2, "quantity", j, Integer.toString(quantity), files[1]);
+						if(quantity == 0)
+							productsToRestock.add(id);
+						break;
 					}
 				}
 			}

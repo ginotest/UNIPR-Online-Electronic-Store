@@ -40,11 +40,9 @@ public class User extends ManageData{
 	}
 
 	void showProducts() {
-
 		System.out.format("%-25s%-25s%-25s","\tNAME", "MANUFACTURER", "PRICE");
 		System.out.println("\n------------------------------------------------------------------");
 		printList();
-
 	}
 	
 	void order(){
@@ -52,7 +50,7 @@ public class User extends ManageData{
 	}
 	
 	void changeQuantity(){
-		System.out.print("Which product? " );
+		System.out.print("Which product number? " );
 		int id = input.nextInt();
 		System.out.print("Enter the new quantity: " );
 		int newQuantity = input.nextInt();
@@ -60,7 +58,7 @@ public class User extends ManageData{
 	}
 	
 	void removeProduct(){
-		System.out.print("Which product? " );
+		System.out.print("Which product number? " );
 		int id = input.nextInt();
 		if(id == 1)
 			id--;
@@ -73,7 +71,7 @@ public class User extends ManageData{
 	}
 	
 	void addToCart() {
-		System.out.print("Which product? : ");
+		System.out.print("Which product number? : ");
 		int selection = input.nextInt()-1;
 		System.out.print("How many? ");
 		int quantity = input.nextInt();

@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class User extends ManageData{
 	public Scanner input = new Scanner(System.in);
-	private static String usernameLogged;
+	private static ArrayList<String> user;
 
 	void register() {
 		String [] fields = new String[4];
@@ -21,63 +21,63 @@ public class User extends ManageData{
 				}
 		}
 		addData("user", fields);	
-		User.usernameLogged = fields[2];
+		user = new ArrayList<String>();
+		user.add(fields[2]);
+		user.add(fields[3]);
 	}
 
 	boolean Login(String username, String password) {
-		String pwd = getPassword("user", username);
-		if((pwd != null) && (pwd.equals(password))) {
-			User.usernameLogged = username;
+		user = getProfile("user", username);
+		if((user.get(1) != null) && (user.get(1).equals(password)))
 			return true;
-		}
+		else
+			user.clear();
 		return false;
 	}
 
 	String getUsername() {
-		return User.usernameLogged;
+		return user.get(0);
 	}
 
 	void showProducts() {
-
 		System.out.format("%-25s%-25s%-25s","\tNAME", "MANUFACTURER", "PRICE");
 		System.out.println("\n------------------------------------------------------------------");
 		printList();
-
 	}
 	
 	void order(){
-		placeOrder(User.usernameLogged);
+		placeOrder(user.get(0));
 	}
 	
 	void changeQuantity(){
-		System.out.print("Which product? " );
+		System.out.print("Which product number? " );
 		int id = input.nextInt();
 		System.out.print("Enter the new quantity: " );
 		int newQuantity = input.nextInt();
-		editQuantity(User.usernameLogged, id, newQuantity);
+		editQuantity(user.get(0), id, newQuantity);
 	}
 	
 	void removeProduct(){
-		System.out.print("Which product? " );
+		System.out.print("Which product number? " );
 		int id = input.nextInt();
 		if(id == 1)
 			id--;
-		removeFromCart(User.usernameLogged, id);
+		removeFromCart(user.get(0), id);
 	}
 	
 	void cart() {
 		readProducts();
-		showCart(User.usernameLogged);
+		showCart(user.get(0));
 	}
 	
 	void addToCart() {
-		System.out.print("Which product? : ");
+		System.out.print("Which product number? : ");
 		int selection = input.nextInt()-1;
 		System.out.print("How many? ");
 		int quantity = input.nextInt();
 		ArrayList<ArrayList<String>> product = getElements();
 		System.out.println("You have added: " + quantity + " " + product.get(selection).get(1) + " to the cart.");
-		editData("user", 4, usernameLogged, product.get(selection).get(0) + "," + quantity);
+		editData("user", 4, user.get(0), product.get(selection).get(0) + "," + quantity);
 	}
 	
 	void readProducts() {
@@ -85,13 +85,13 @@ public class User extends ManageData{
 	}
 
 	void removeUser(){
-		removeData("user",usernameLogged);
+		removeData("user",user.get(0));
 	}
 
 	void changeUsername(String newUsername){
 		if(!exist("user", newUsername)) {
-			editData("user", 0, usernameLogged, newUsername);
-			User.usernameLogged = newUsername;
+			editData("user", 0, user.get(0), newUsername);
+			user.set(0, newUsername);
 			System.out.println("Username changed");
 		}
 		else
@@ -99,30 +99,18 @@ public class User extends ManageData{
 	}
 	
 	void setAddress(String newAddress){
-			editData("user", 5, usernameLogged, newAddress);
-			User.usernameLogged = newAddress;
+			editData("user", 5,  user.get(0), newAddress);
 			System.out.println("The address has been set!");
 	}
 
-	boolean changePassword(String oldPassword, String newPassword, String newPassword2){
-
-
-		if(newPassword.equals(newPassword2)) {
-			if (Login(usernameLogged, oldPassword)) {
-				editData("user", 1, usernameLogged, newPassword);
+	void changePassword(String oldPassword, String newPassword){
+			if (Login( user.get(0), oldPassword)) {
+				editData("user", 1, user.get(0), newPassword);
 				System.out.println("Password changed");
-				return true;
 			}
 			else {
 				System.out.println("Your old password was entered incorrectly, please enter it again.");
-				return false;
 			}
-		}
-		else {
-			System.out.println("Passwords do not match");
-			return false;
-		}
-
 	}
 
 	 void searchProducts(String type, String str) {

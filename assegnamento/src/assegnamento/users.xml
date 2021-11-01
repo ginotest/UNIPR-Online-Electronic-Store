@@ -5,7 +5,7 @@
         <surname>kingsley</surname>
         <username>vane</username>
         <password>1234</password>
-        <address>Via Montanare 43</address>
+        <address>Via Giuseppe Rossi, 13</address>
         <cart>none</cart>
     </user>
     <user>
@@ -21,7 +21,7 @@
         <surname>aaadv</surname>
         <username>a</username>
         <password>a</password>
-        <address>Via delle patatoncole quarantordici</address>
+        <address>Via delle patatoncole 14</address>
         <cart>none</cart>
     </user>
     <user>
@@ -29,7 +29,7 @@
         <surname>Lodero</surname>
         <username>Allo134</username>
         <password>password</password>
-        <address>none</address>
+        <address>Via carra, 9</address>
         <cart>none</cart>
     </user>
 </users>

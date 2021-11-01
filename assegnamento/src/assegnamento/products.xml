@@ -5,21 +5,21 @@
         <name>Printer</name>
         <manufacturer>Epson</manufacturer>
         <price>53.90</price>
-        <quantity>127</quantity>
+        <quantity>94</quantity>
     </product>
     <product>
         <id>12</id>
         <name>MateBook</name>
         <manufacturer>Huawei</manufacturer>
         <price>790.00</price>
-        <quantity>111</quantity>
+        <quantity>110</quantity>
     </product>
     <product>
         <id>55</id>
         <name>Printer</name>
         <manufacturer>Samsung</manufacturer>
         <price>99.90</price>
-        <quantity>120</quantity>
+        <quantity>115</quantity>
     </product>
     <product>
         <id>70</id>
@@ -33,28 +33,28 @@
         <name>iPencil</name>
         <manufacturer>Apple</manufacturer>
         <price>99.00</price>
-        <quantity>16</quantity>
+        <quantity>13</quantity>
     </product>
     <product>
         <id>43</id>
         <name>wireless Keyboard</name>
         <manufacturer>Apple</manufacturer>
         <price>59.00</price>
-        <quantity>16</quantity>
+        <quantity>15</quantity>
     </product>
     <product>
         <id>55</id>
         <name>earbuds</name>
         <manufacturer>Samsumg</manufacturer>
         <price>119.00</price>
-        <quantity>12</quantity>
+        <quantity>115</quantity>
     </product>
     <product>
         <id>15</id>
         <name>Wireless Speaker</name>
         <manufacturer>Xiaomi</manufacturer>
         <price>54.45</price>
-        <quantity>112</quantity>
+        <quantity>108</quantity>
     </product>
     <product>
         <id>1276</id>
@@ -68,6 +68,6 @@
         <name>K8 2017</name>
         <manufacturer>LG</manufacturer>
         <price>120</price>
-        <quantity>15</quantity>
+        <quantity>0</quantity>
     </product>
 </products>

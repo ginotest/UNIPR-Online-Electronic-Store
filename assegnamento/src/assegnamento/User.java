@@ -28,7 +28,9 @@ public class User extends ManageData{
 
 	boolean Login(String username, String password) {
 		user = getProfile("user", username);
-		if((user.get(1) != null) && (user.get(1).equals(password)))
+		if(user.isEmpty())
+			return false;
+		else if(!user.isEmpty() && ((user.get(1) != null) && (user.get(1).equals(password))))
 			return true;
 		else
 			user.clear();
@@ -44,42 +46,48 @@ public class User extends ManageData{
 		System.out.println("\n------------------------------------------------------------------");
 		printList();
 	}
-	
+
 	void order(){
 		placeOrder(user.get(0));
 	}
-	
+
 	void changeQuantity(){
-		System.out.print("Which product number? " );
-		int id = input.nextInt();
-		System.out.print("Enter the new quantity: " );
-		int newQuantity = input.nextInt();
-		editQuantity(user.get(0), id, newQuantity);
+
+		editQuantity(user.get(0));
 	}
-	
+
 	void removeProduct(){
-		System.out.print("Which product number? " );
-		int id = input.nextInt();
-		if(id == 1)
-			id--;
-		removeFromCart(user.get(0), id);
+
+		removeFromCart(user.get(0));
 	}
-	
+
 	void cart() {
 		readProducts();
 		showCart(user.get(0));
 	}
-	
+
 	void addToCart() {
+		ArrayList<ArrayList<String>> product = getElements();
 		System.out.print("Which product number? : ");
 		int selection = input.nextInt()-1;
-		System.out.print("How many? ");
-		int quantity = input.nextInt();
-		ArrayList<ArrayList<String>> product = getElements();
-		System.out.println("You have added: " + quantity + " " + product.get(selection).get(1) + " to the cart.");
-		editData("user", 4, user.get(0), product.get(selection).get(0) + "," + quantity);
+		if(selection <= product.size()-1 && selection > 0) {
+			if(Integer.parseInt(product.get(selection).get(4))>0) {
+				System.out.print("How many? ");
+				int quantity = input.nextInt();
+				if(quantity <= Integer.parseInt(product.get(selection).get(4))) {
+					System.out.println("You have added: " + quantity + " " + product.get(selection).get(2) + " " + product.get(selection).get(1) + " to the cart.");
+					editData("user", 4, user.get(0), product.get(selection).get(0) + "," + quantity);
+				}
+				else
+					System.out.println("There are only " + product.get(selection).get(4) + " " + product.get(selection).get(2) + " " + product.get(selection).get(1) + " available!");
+			}
+			else
+				System.out.println("This product is currently unavailable!");
+		}
+		else
+			System.out.println("This product does not exist.");
 	}
-	
+
 	void readProducts() {
 		readAll("product");
 	}
@@ -97,42 +105,42 @@ public class User extends ManageData{
 		else
 			System.out.println("Username already exists");
 	}
-	
+
 	void setAddress(String newAddress){
-			editData("user", 5,  user.get(0), newAddress);
-			System.out.println("The address has been set!");
+		editData("user", 5,  user.get(0), newAddress);
+		System.out.println("The address has been set!");
 	}
 
 	void changePassword(String oldPassword, String newPassword){
-			if (Login( user.get(0), oldPassword)) {
-				editData("user", 1, user.get(0), newPassword);
-				System.out.println("Password changed");
-			}
-			else {
-				System.out.println("Your old password was entered incorrectly, please enter it again.");
-			}
+		if (Login( user.get(0), oldPassword)) {
+			editData("user", 1, user.get(0), newPassword);
+			System.out.println("Password changed");
+		}
+		else {
+			System.out.println("Your old password was entered incorrectly, please enter it again.");
+		}
 	}
 
-	 void searchProducts(String type, String str) {
-		 switch(type) {
-		 case "name":
-			 filterList(1, str);
-			 break;
-			 
-		 case "manufacturer":
-			 filterList(2, str);
-			 break;
-			 
-		 case "highestPrice":
-			 filterList(3, str);
-			 break;
-			 
-		 case "lowestPrice":
-			 filterList(4, str);
-			 break;
-			 
+	void searchProducts(String type, String str) {
+		switch(type) {
+		case "name":
+			filterList(1, str);
+			break;
+
+		case "manufacturer":
+			filterList(2, str);
+			break;
+
+		case "highestPrice":
+			filterList(3, str);
+			break;
+
+		case "lowestPrice":
+			filterList(4, str);
+			break;
+
 		default:
 			break;
-		 }
+		}
 	}
 }

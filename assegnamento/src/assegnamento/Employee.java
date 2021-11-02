@@ -9,7 +9,9 @@ public class Employee extends ManageData {
 
 	public boolean login(String username, String password) {
 		employee = getProfile("employee", username);
-		if((employee.get(1) != null) && (employee.get(1).equals(password)))
+		if(employee.isEmpty())
+			return false;
+		else if(!employee.isEmpty() && ((employee.get(1) != null) && (employee.get(1).equals(password))))
 			return true;
 		else
 			employee.clear();
@@ -19,23 +21,23 @@ public class Employee extends ManageData {
 	public void readOrders() {
 		orders = readAll("delivery");
 	}
-	
+
 	public void showOrders() {
 		orders = readAll("delivery");
 		if(orders.size() == 0) {
 			System.out.print("\nNo Orders made yet.\n");
 			return;
 		}
-		
+
 		String[] array;
 		ArrayList<ArrayList<String>> products = readAll("product");
-		
+
 		for (int i = 0; i < orders.size(); i++) {
 			System.out.print("\n" + (i+1) + ") ORDER " + orders.get(i).get(0) + "\n");
-	
+
 			array = orders.get(i).get(3).split(",");
 			System.out.format("%-25s%-25s%-25s\n","\tNAME", "MANUFACTURER", "QUANTITY");
-			
+
 			for (int j = 0; j < array.length; j++) {
 				for (int k = 0; k < products.size(); k++) {
 					if(products.get(k).get(0).equals(array[j])) {
@@ -48,7 +50,7 @@ public class Employee extends ManageData {
 				System.out.format("%-25s",array[++j]);
 				System.out.println();
 			}
-			
+
 			System.out.println("\n------------------------------------------------------------------");
 		}
 		System.out.println();
@@ -57,13 +59,13 @@ public class Employee extends ManageData {
 	public void shipProduct(int select) {
 		if((select > 0) && (select <= orders.size())) {
 			System.out.println("ORDER " + orders.get(select-1).get(0) + " has been Shipped to '" +
-			orders.get(select-1).get(1) + "' to address '" + orders.get(select-1).get(2) + "'");
+					orders.get(select-1).get(1) + "' to address '" + orders.get(select-1).get(2) + "'");
 			removeData("delivery", orders.get(select-1).get(0));
 		}
 		else {
 			System.out.println("ORDER TO BE SHIPPED NOT FOUND.");
 		}
-		
+
 	}
 
 	public boolean showNotification() {
@@ -71,7 +73,7 @@ public class Employee extends ManageData {
 			System.out.print("\nNo Notification\n");
 			return false;
 		}
-		
+
 		readAll("product");
 		ArrayList<ArrayList<String>> products = getElements();
 		System.out.format("%-25s%-25s%-25s\n","\tNAME", "MANUFACTURER", "QUANTITY");

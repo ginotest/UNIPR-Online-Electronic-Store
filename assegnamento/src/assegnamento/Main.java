@@ -18,25 +18,25 @@ public class Main extends User_Interface{
 			e.printStackTrace();
 		}
 	}
-	
+
 	static void unavailable() {
 		System.out.println("\nUNAVAILABLE!");
 		sleep(3000);
 	}
-	
+
 	static void goToLogin(String msg) {
 		sleep(1000);
 		System.out.println(msg);
 		sleep(4000);
 		mainMenu();
 	}
-	
+
 	static void login(String who) {
 
 		String username= "", password = "";
 		clearScreen();
 		title(0);
-		
+
 		System.out.print("\n username: ");
 		username = input.nextLine();
 		System.out.print("\n password: ");
@@ -115,6 +115,9 @@ public class Main extends User_Interface{
 				employeeMenu();
 				break;
 
+			case "":
+				break;
+
 			default:
 				unavailable();
 				employeeMenu();
@@ -139,6 +142,9 @@ public class Main extends User_Interface{
 			case "9":
 				sleep(2000);
 				employeeMenu();
+				break;
+
+			case "":
 				break;
 
 			default:
@@ -173,6 +179,9 @@ public class Main extends User_Interface{
 				employeeMenu();
 				break;
 
+			case "":
+				break;
+
 			default:
 				unavailable();
 				notificationMenu();
@@ -181,7 +190,7 @@ public class Main extends User_Interface{
 		}
 	}
 
-	
+
 	static void adminMenu() {
 		boolean run = true;
 		while(run) {
@@ -196,15 +205,21 @@ public class Main extends User_Interface{
 				break;
 
 			case "1":
+				sleep(2000);
 				adminSubMenu_user();
 				break;
 
 			case "2":
+				sleep(2000);
 				adminSubMenu_product();
 				break;
 
 			case "9":
+				sleep(2000);
 				mainMenu();
+				break;
+
+			case "":
 				break;
 
 			default:
@@ -242,6 +257,14 @@ public class Main extends User_Interface{
 				sleep(2500);
 				break;
 
+			case "9":
+				sleep(2000);
+				adminMenu();
+				break;
+
+			case "":
+				break;
+
 			default:
 				unavailable();
 				adminSubMenu_user();
@@ -271,6 +294,15 @@ public class Main extends User_Interface{
 				admin.remove("product");
 				sleep(2500);
 				break;
+
+			case "9":
+				sleep(2000);
+				adminMenu();
+				break;
+				
+			case "":
+				break;
+
 			default:
 				unavailable();
 				adminSubMenu_product();
@@ -279,7 +311,7 @@ public class Main extends User_Interface{
 		}
 	}
 
-	
+
 	static void showProducts() {
 		clearScreen();
 		title(1);
@@ -309,7 +341,7 @@ public class Main extends User_Interface{
 				sleep(1500);
 				cartMenu();
 				break;
-				
+
 			case "8":
 				sleep(1500);
 				profileMenu();
@@ -318,6 +350,9 @@ public class Main extends User_Interface{
 			case "9":
 				sleep(2000);
 				mainMenu();
+				break;
+
+			case "":
 				break;
 
 			default:
@@ -352,20 +387,23 @@ public class Main extends User_Interface{
 				sleep(2000);
 				showProducts();
 				break;
-				
+
 			case "3":
 				sleep(1000);
 				searchProductMenu();
 				break;
-				
+
 			case "7":
 				sleep(1500);
 				cartMenu();
 				break;
-				
+
 			case "9":
 				sleep(2000);
 				userMenu();
+				break;
+
+			case "":
 				break;
 
 			default:
@@ -375,12 +413,12 @@ public class Main extends User_Interface{
 			}
 		}
 	}
-	
-	
+
+
 	static void searchProductMenu_sub(String choice) {
 		String str;
 		switch(choice) {
-		
+
 		case "0":
 			closeStore();
 			break;
@@ -396,13 +434,13 @@ public class Main extends User_Interface{
 			str = input.nextLine();
 			user.searchProducts("manufacturer", str);
 			break;
-			
+
 		case "3":
 			System.out.print("\nEnter highest Price for products: ");
 			str = input.nextLine();
 			user.searchProducts("highestPrice", str);
 			break;
-			
+
 		case "4":
 			System.out.print("\nEnter lowest Price for products: ");
 			str = input.nextLine();
@@ -412,6 +450,9 @@ public class Main extends User_Interface{
 		case "9":
 			sleep(2000);
 			showProducts();
+			break;
+
+		case "":
 			break;
 
 		default:
@@ -429,11 +470,11 @@ public class Main extends User_Interface{
 			clearScreen();
 			title(1);
 			menu(7);
-			
+
 			String choices = input.nextLine().trim();
 			if(!(choices.length() == 0)) {
 				array = choices.split(" ");
-				
+
 				user.readProducts();
 				for(String choice: array) {
 					if (choice.trim().length() == 1)
@@ -447,7 +488,7 @@ public class Main extends User_Interface{
 		}
 	}
 
-	
+
 	static void profileMenu(){
 		boolean run = true;
 		while(run) {
@@ -468,7 +509,7 @@ public class Main extends User_Interface{
 				sleep(2000);
 				userMenu();
 				break;
-				
+
 			case "2":
 				while(true) {
 					System.out.print("\n Current password: ");
@@ -489,7 +530,7 @@ public class Main extends User_Interface{
 				sleep(2000);
 				userMenu();
 				break;
-				
+
 			case "3":
 				System.out.print("\n Enter your address: ");
 				String newAddress = input.nextLine();
@@ -498,7 +539,7 @@ public class Main extends User_Interface{
 				sleep(2000);
 				userMenu();
 				break;
-				
+
 			case "8":
 				System.out.println("Password: ");
 				String password = input.nextLine();
@@ -519,10 +560,13 @@ public class Main extends User_Interface{
 					profileMenu();
 				}
 				break;
-				
+
 			case "9":
 				sleep(2000);
 				userMenu();
+				break;
+
+			case "":
 				break;
 
 			default:
@@ -532,8 +576,8 @@ public class Main extends User_Interface{
 			}
 		}
 	}	
-	
-	
+
+
 	static void cartMenu() {
 		boolean run = true;
 		while(run) {
@@ -549,17 +593,17 @@ public class Main extends User_Interface{
 
 			case "1":
 				user.removeProduct();
-				cartMenu();
 				sleep(2000);
+				cartMenu();
 				break;
 
 			case "2":
 				sleep(1000);
 				user.changeQuantity();
-				cartMenu();
 				sleep(2000);
+				cartMenu();
 				break;
-				
+
 			case "5":
 				sleep(2000);
 				user.order();
@@ -570,6 +614,9 @@ public class Main extends User_Interface{
 				user.readProducts();
 				sleep(2000);
 				showProducts();
+				break;
+
+			case "":
 				break;
 
 			default:
@@ -618,6 +665,9 @@ public class Main extends User_Interface{
 				run = false;
 				sleep(1000);
 				login("employee");
+				break;
+
+			case "":
 				break;
 
 			default:

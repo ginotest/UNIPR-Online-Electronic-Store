@@ -36,8 +36,8 @@ public abstract class ManageData {
 
 	protected static ArrayList<ArrayList<String>> elements;
 	protected static ArrayList<String>productsToRestock;
-	
-	
+
+
 	public ManageData() {
 		productsToRestock = new ArrayList<String>();
 	}
@@ -169,6 +169,8 @@ public abstract class ManageData {
 	}
 
 	public static boolean editData(String type, int option, String select, String content) {
+		ArrayList<String> products = null;
+		boolean exist=false;
 		String xFile = "";
 		int idx = 0;
 		String[][] xElement = {{"username", "password", "name", "surname", "admin"},{"id", "name", "manufacturer", "price", "quantity" }, {"username", "password", "name", "surname", "cart","address"}};
@@ -197,11 +199,25 @@ public abstract class ManageData {
 					else {
 						if(content.contains("replace"))
 							setTextValue(doc, xElement[idx][option], i, content.replace("replace", ""), xFile);
-						else
-							setTextValue(doc, xElement[idx][option], i, cart + "," + content, xFile);
+						else {
+							products = new ArrayList <> (Arrays.asList(getTextValue(doc, "cart", i).split(",")));
+							for(int j = 0; j < products.size() ;j++) {
+								if( Arrays.asList(content.split(",")).get(0).equals(products.get(j))) {
+									exist=true;
+									products.set(j+1, Integer.toString(Integer.parseInt(products.get(j+1)) + Integer.parseInt(Arrays.asList(content.split(",")).get(1))));
+									break;
+								}
+								j++;
+							}
+							if(exist==true) {
+								editData("user",4 ,select , "replace" + products.toString().replace("[", "").replace("]", "").replace(" ", ""));
+							}
+							else
+								setTextValue(doc, xElement[idx][option], i, cart + "," + content, xFile);
+						}
+
+
 					}
-
-
 				}
 				return true;
 			}
@@ -240,7 +256,7 @@ public abstract class ManageData {
 
 			for (int j = 0; j < 5; j++) {
 				if ((type != "delivery")|| ((type == "delivery" )  && j < 4) )
-				data = getTextValue(doc, xElements[idx][j], i);
+					data = getTextValue(doc, xElements[idx][j], i);
 				if ((data != null) && (!data.isEmpty())) {
 					if(type == "product" && xElements[idx][j].equals("id")) {
 						array.add(data);
@@ -267,18 +283,18 @@ public abstract class ManageData {
 
 				}
 			}
-			
+
 			if(type == "employee") {
 				isAdmin = getTextValue(doc, "admin", i);
 				if ((isAdmin != null) && (!isAdmin.isEmpty())) {
-						array.add(isAdmin);
+					array.add(isAdmin);
 				}
 			}
 
 			if(type == "user") {
 				cart = getTextValue(doc, "cart", i);
 				if ((cart != null) && (!cart.isEmpty())){
-						array.add(cart);
+					array.add(cart);
 				}
 			}
 
@@ -307,21 +323,21 @@ public abstract class ManageData {
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			dom = db.parse(".\\src\\assegnamento\\"+xFile);
 			Element doc = dom.getDocumentElement();
-			
+
 			array = new ArrayList<String>();
 			for (int i = 0; i < doc.getElementsByTagName(type).getLength(); i++) {
-				
+
 				username = getTextValue(doc, "username", i);
-				
+
 				if((username != null) && (!username.isEmpty()) && (username.equals(usrn))) {
 					array.add(username);
-					
+
 					password = getTextValue(doc, "password", i);
 					if ( password != null) {
 						if (!password.isEmpty())
 							array.add(password);
 					}
-					
+
 					if(type != "user") {
 						isAdmin = getTextValue(doc, "admin", i);
 						if (isAdmin != null) {
@@ -329,7 +345,7 @@ public abstract class ManageData {
 								array.add(isAdmin);
 						}
 					}
-					
+
 					return array;
 				}
 			}
@@ -392,7 +408,7 @@ public abstract class ManageData {
 			e.printStackTrace();  
 		} 
 	}
-	
+
 	public static void save(Element doc, String output) {
 
 		try {
@@ -417,6 +433,9 @@ public abstract class ManageData {
 		else if(type == "employee") {
 			xFile = files[0]; id = "username";
 		}
+		else if(type == "delivery") {
+			xFile = files[3]; id = "id";
+		}
 
 		Element doc = docBuilder(xFile);
 
@@ -429,12 +448,13 @@ public abstract class ManageData {
 
 	}
 
-	public static void editQuantity(String user, int index, int newQuantity){
+	public static void editQuantity(String user){
+		Scanner input = new Scanner(System.in);
 
 		ArrayList<String> products = null;
 		String xFile = "";
 		String id = ""; 
-		int idx = 0;
+		int idx = 0, temp=0;
 
 		xFile = files[2]; 
 
@@ -443,27 +463,55 @@ public abstract class ManageData {
 		for (int i = 0; i < doc.getElementsByTagName("user").getLength(); i++) {
 			username = getTextValue(doc, "username", i);
 			if (username != null && !username.isEmpty() && username.equals(user)) {
+				if(getTextValue(doc, "cart", i).equals("none")) {
+					System.out.println("The cart is empty! There is nothing to change.");
+					return;
+				}
 				products = new ArrayList <> (Arrays.asList(getTextValue(doc, "cart", i).split(",")));
 				break;
 			}
 
 		}
-		for(int i = 0; i < products.size() && i <= index;i++) {
-			System.out.println(i+ ")");
-			id = products.get(i);
-			i++;
+
+		System.out.print("Which product number? " );
+		int index = input.nextInt();
+
+		if(index > products.size()/2) {
+			System.out.print("There are only " + products.size()/2 + " products in your cart!");
+			return;
 		}
 
+		System.out.print("Enter the new quantity: " );
+		int newQuantity = input.nextInt();
+
+		if(index!=1) {
+			index--;
+			for(int i = 0; index!=0;i++, index--) {
+				i++;
+				if(index==1) {
+					i++;
+					temp=i;
+					id = products.get(i);
+				}
+			}
+		}
+		else {
+			id = products.get(0);
+			temp=0;
+		}
 		idx = cids.indexOf(id);
 		if(newQuantity <= Integer.parseInt(cquantities.get(idx))) {
-			products.set(products.indexOf(id)+1, Integer.toString(newQuantity));
-			editData("user",4 ,user , "replace" + products.toString().replace("[", "").replace("]", "").replace(" ", ""));}
-
+			products.set(temp+1, Integer.toString(newQuantity));
+			editData("user",4 ,user , "replace" + products.toString().replace("[", "").replace("]", "").replace(" ", ""));
+			System.out.println("Done!");
+		}
+		else
+			System.out.println("There are only " + cquantities.get(idx) + " " + cmanufacturers.get(idx) + " " + cnames.get(idx) + " available!");
 
 	}
 
-	public static void removeFromCart(String user, int index){
-
+	public static void removeFromCart(String user){
+		Scanner input = new Scanner(System.in);
 		ArrayList<String> products = null;
 		String xFile = "";
 		String id = ""; 
@@ -476,24 +524,41 @@ public abstract class ManageData {
 		for (int i = 0; i < doc.getElementsByTagName("user").getLength(); i++) {
 			username = getTextValue(doc, "username", i);
 			if (username != null && !username.isEmpty() && username.equals(user)) {
+				if(getTextValue(doc, "cart", i).equals("none")) {
+					System.out.println("The cart is empty! There is nothing to remove.");
+					return;
+				}
 				products = new ArrayList <> (Arrays.asList(getTextValue(doc, "cart", i).split(",")));
 				break;
 			}
-
 		}
+
+
+		System.out.print("Which product number? " );
+		int index = input.nextInt();
+
+		if(index > products.size()/2) {
+			System.out.print("There are only " + products.size()/2 + " products in your cart!");
+			return;
+		}
+
+		if(index == 1)
+			index--;
+
+
 		for(int i = 0; i < products.size() && i <= index;i++) {
-			System.out.println(i+ ")");
 			id = products.get(i);
-			System.out.println(id);
 			i++;
 		}
-		System.out.println(cids);
 		idx = products.indexOf(id);
 		products.remove(idx);
 		products.remove(idx);
-		editData("user",4 ,user , "replace" + products.toString().replace("[", "").replace("]", "").replace(" ", ""));
+		if(!products.isEmpty())
+			editData("user",4 ,user , "replace" + products.toString().replace("[", "").replace("]", "").replace(" ", ""));
+		else
+			editData("user",4 ,user , "replacenone");
 
-
+		System.out.println("Done!");
 	}
 
 	public static void showCart(String user) {
@@ -522,14 +587,14 @@ public abstract class ManageData {
 				idx = cids.indexOf(products.get(i));
 			}
 			else {
-				System.out.format("%-25s%-25s%-25s%-25s", count + ") " + cnames.get(idx),  "x" +products.get(i), cmanufacturers.get(idx) , "$" + Float.parseFloat(cprices.get(idx))*Integer.parseInt(products.get(i)));
+				System.out.format("%-25s%-25s%-25s%-25s", count + ") " + cnames.get(idx),  "x" +products.get(i), cmanufacturers.get(idx) , "$" + String.format("%.2f", Float.parseFloat(cprices.get(idx))*Integer.parseInt(products.get(i))));
 				System.out.println();
 				count++;
 				total+=Float.parseFloat(cprices.get(idx))*Integer.parseInt(products.get(i));
 			}
 
 		}
-		System.out.format("%-25s%-23s%-20s%1s","", "", "", "Total: $" + total);
+		System.out.format("%-25s%-23s%-20s%1s","", "", "", "Total: $" + String.format("%.2f", total));
 		System.out.println();
 	}
 
@@ -581,16 +646,30 @@ public abstract class ManageData {
 				}
 				System.out.println("\nOrder confrimed to address '" + order[2] + "'");
 				products = new ArrayList <> (Arrays.asList(order[3].split(",")));
-				break;		
+				break;
 			}
 		}
 
 		for(int j = 0; j < products.size()-1; j++) {
 			tempID = Integer.parseInt(products.get(j)) + Integer.parseInt(products.get(j+1));
 		}
+
+
 		tempID += ThreadLocalRandom.current().nextInt(1, 10000 + 1);
 
 		order[0] = "#"+Integer.toString(tempID);
+
+		if(exist("delivery", order[0])) {
+
+			while(exist("delivery", order[0])) {
+
+				tempID += ThreadLocalRandom.current().nextInt(1, 10000 + 1);
+
+				order[0] = "#"+Integer.toString(tempID);
+
+			}
+
+		}
 
 
 		Element doc2 = docBuilder(files[1]);
@@ -649,8 +728,12 @@ public abstract class ManageData {
 		}
 		for (int i = 0; i < elements.size(); i++) {
 			System.out.print("\n" + (i+1) + ")  ");
-			for (int j = 1; j < elements.get(i).size()-1; j++) 
-				System.out.format("%-25s",elements.get(i).get(j));
+			for (int j = 1; j < elements.get(i).size()-1; j++) {
+				if(j == 3 && (Integer.parseInt(elements.get(i).get(j+1)) == 0))
+					System.out.format("%-25s","out of stock!");
+				else
+					System.out.format("%-25s",elements.get(i).get(j));
+			}
 			System.out.println();
 		}
 		System.out.println();	

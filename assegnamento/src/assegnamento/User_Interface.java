@@ -77,12 +77,18 @@ public class User_Interface {
 			System.out.println("--------------------\t---------------------\t-----------------------");
 			System.out.println("| Type 1: Add User |\t| Type 2: Edit User |\t| Type 3: Delete User |");
 			System.out.println("--------------------\t---------------------\t-----------------------");
+			System.out.println("               ------------------------------------");
+			System.out.println("               | Type 9: RETURN TO PREVIOUS MENU  |");
+			System.out.println("               ------------------------------------\n");
 			System.out.print("\nWhat do you want to do?  ");
 			break;
 		case 4:
 			System.out.println("----------------------------\t-------------------------------");
 			System.out.println("| Type 1: Add Product Type |\t| Type 2: Remove Product Type |");
 			System.out.println("----------------------------\t-------------------------------");
+			System.out.println("               ------------------------------------");
+			System.out.println("               | Type 9: RETURN TO PREVIOUS MENU  |");
+			System.out.println("               ------------------------------------\n");
 			System.out.print("\nWhat do you want to do?  ");
 			break;
 			

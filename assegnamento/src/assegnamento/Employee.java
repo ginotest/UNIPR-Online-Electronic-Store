@@ -7,6 +7,10 @@ public class Employee extends ManageData {
 	private static ArrayList<String> employee;
 	protected static ArrayList<ArrayList<String>> orders;
 	protected static ArrayList<ArrayList<String>> productsToRestock;
+	
+	public Employee() {
+		employee = new ArrayList<String>();
+	}
 
 	public boolean login(String username, String password) {
 		employee = getProfile("employee", username);
@@ -37,12 +41,13 @@ public class Employee extends ManageData {
 			System.out.print("\n" + (i+1) + ") ORDER " + orders.get(i).get(0) + "\n");
 
 			array = orders.get(i).get(3).split(",");
-			System.out.format("%-25s%-25s%-25s\n","\tNAME", "MANUFACTURER", "QUANTITY");
+			System.out.format("%-25s%-25s%-25s\n","\t  NAME", "MANUFACTURER", "QUANTITY");
 
 			for (int j = 0; j < array.length; j++) {
 				for (int k = 0; k < products.size(); k++) {
 					if(products.get(k).get(0).equals(array[j])) {
 						System.out.print("\t");
+						System.out.print((j+1) + ")  ");
 						for (int l = 1; l < products.get(k).size()-2; l++)
 							System.out.format("%-25s",products.get(k).get(l));
 						break;
@@ -88,9 +93,16 @@ public class Employee extends ManageData {
 	}
 
 	public void restock(int select, int quantity) {
-		/*if(editData("product", 4, productsToRestock.get(select), Integer.toString(quantity)))
-			System.out.println("Product successfully restocked.");
-		else 
-			System.out.println("Error in restocking Product.");*/
+		if((select > 0) && (select <= productsToRestock.size()))
+			if(editData("product", 4, productsToRestock.get(select-1).get(0), Integer.toString(quantity))) {
+				removeData("restock", productsToRestock.get(select-1).get(0));
+				System.out.println("Product successfully restocked.");
+				return;
+			}
+		System.out.println("Error in restocking Product.");		
+	}
+	
+	public void logout() {
+		employee = new ArrayList<String>();
 	}
 }

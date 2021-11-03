@@ -8,7 +8,11 @@ public class Admin extends ManageData{
 	public Scanner input = new Scanner(System.in);
 	public Scanner input2 = new Scanner(System.in);
 	private static ArrayList<String> admin;
-
+	
+	
+	public Admin() {
+		admin = new ArrayList<String>();
+	}
 
 	boolean login(String username, String password) {
 		admin = getProfile("employee", username);
@@ -85,6 +89,10 @@ public class Admin extends ManageData{
 		System.out.print(message[select]);
 		removeData(type, remove);
 
+	}
+	
+	public void logout() {
+		admin = new ArrayList<String>();
 	}
 
 }

@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <restocks>
     <restock>
-        <id>43</id>
-        <name>wireless Keyboard</name>
-        <manufacturer>Apple</manufacturer>
-    </restock>
-    <restock>
-        <id>9090</id>
-        <name>K8 2017</name>
-        <manufacturer>LG</manufacturer>
+        <id>69</id>
+        <name>Printer</name>
+        <manufacturer>Epson</manufacturer>
     </restock>
 </restocks>

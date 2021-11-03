@@ -19,8 +19,9 @@ public class Main extends User_Interface{
 		}
 	}
 
-	static void unavailable() {
-		System.out.println("\nUNAVAILABLE!");
+	static void showMsg(String msg) {
+		System.out.println();
+		System.out.println(msg);
 		sleep(3000);
 	}
 
@@ -28,7 +29,31 @@ public class Main extends User_Interface{
 		sleep(1000);
 		System.out.println(msg);
 		sleep(4000);
-		mainMenu();
+		loginMenu();
+	}
+	
+	static void showProducts() {
+		clearScreen();
+		title(1);
+		user.showProducts();
+		productsMenu();
+	}
+	
+	private static void logout(String type) {
+		showMsg("logging out..");
+		switch(type) {
+		case "user":
+			user.logout();
+			break;
+		case "employee":
+			employee.logout();
+			break;
+		case "admin":
+			admin.logout();
+			break;
+		}
+		sleep(2000);
+		homePage(true);
 	}
 
 	static void login(String who) {
@@ -90,36 +115,24 @@ public class Main extends User_Interface{
 			switch(input.nextLine()) {
 
 			case "0":
-				closeStore();
+				logout("employee");
 				break;
 
 			case "1":
 				sleep(2000);
-				clearScreen();
-				employee.readOrders();
-				employee.showOrders();
 				ordersMenu();
 				break;
 
 			case "2":
 				sleep(1500);
-				clearScreen();
-				if(employee.showNotification())
-					notificationMenu();
-				else
-					sleep(4000);
-				break;
-
-			case "9":
-				sleep(2000);
-				mainMenu();
+				notificationMenu();
 				break;
 
 			case "":
 				break;
 
 			default:
-				unavailable();
+				showMsg("UNAVALIABLE");
 				employeeMenu();
 				break;
 			}
@@ -129,8 +142,16 @@ public class Main extends User_Interface{
 	private static void ordersMenu() {
 		boolean run = true;
 		while(run) {
+			clearScreen();
+			employee.readOrders();
+			employee.showOrders();
 			menu(12);
+			
 			switch(input.nextLine()) {
+			
+			case "0":
+				logout("employee");
+				break;
 
 			case "1":
 				sleep(1000);
@@ -139,7 +160,7 @@ public class Main extends User_Interface{
 				sleep(2000);
 				employee.shipProduct(Integer.parseInt(select));
 				sleep(4000);
-
+				ordersMenu();
 			case "9":
 				sleep(2000);
 				employeeMenu();
@@ -149,8 +170,8 @@ public class Main extends User_Interface{
 				break;
 
 			default:
-				unavailable();
-				employeeMenu();
+				showMsg("UNAVALIABLE");
+				ordersMenu();
 				break;
 			}
 		}
@@ -159,20 +180,31 @@ public class Main extends User_Interface{
 	private static void notificationMenu() {
 		boolean run = true;
 		while(run) {
+			clearScreen();
+			if(!employee.showNotification()) {
+				sleep(4000);
+				employeeMenu();
+			}
 			menu(11);
+			
 			switch(input.nextLine()) {
 
 			case "0":
-				closeStore();
+				logout("employee");
 				break;
 
 			case "1":
-				sleep(2000);
+				sleep(1000);
 				System.out.print("\nWhat number do you want to Restock? ");
 				String select = input.nextLine();
 				System.out.print("\nQuantity? ");
-				int quantity =  input.nextInt();
-				employee.restock(Integer.parseInt(select), quantity);
+				String quantity =  input.nextLine();
+				employee.restock(Integer.parseInt(select), Integer.parseInt(quantity));
+				sleep(4000);
+				clearScreen();
+				if(employee.showNotification())
+					notificationMenu();
+				employeeMenu();
 				break;
 
 			case "9":
@@ -184,7 +216,7 @@ public class Main extends User_Interface{
 				break;
 
 			default:
-				unavailable();
+				showMsg("UNAVALIABLE");
 				notificationMenu();
 				break;
 			}
@@ -201,8 +233,7 @@ public class Main extends User_Interface{
 			switch(input.nextLine()) {
 
 			case "0":
-				run = false;
-				closeStore();
+				logout("admin");
 				break;
 
 			case "1":
@@ -217,14 +248,14 @@ public class Main extends User_Interface{
 
 			case "9":
 				sleep(2000);
-				mainMenu();
+				loginMenu();
 				break;
 
 			case "":
 				break;
 
 			default:
-				unavailable();
+				showMsg("UNAVALIABLE");
 				adminMenu();
 				break;
 			}
@@ -242,6 +273,9 @@ public class Main extends User_Interface{
 			menu(3);
 
 			switch(input.nextLine()) {
+			
+			case "0":
+				logout("admin");
 
 			case "1":
 				admin.add("employee");
@@ -267,7 +301,7 @@ public class Main extends User_Interface{
 				break;
 
 			default:
-				unavailable();
+				showMsg("UNAVALIABLE");
 				adminSubMenu_user();
 				break;
 			}
@@ -285,6 +319,9 @@ public class Main extends User_Interface{
 			menu(4);
 
 			switch(input.nextLine()) {
+			
+			case "0":
+				logout("admin");
 
 			case "1":
 				admin.add("product");
@@ -305,20 +342,13 @@ public class Main extends User_Interface{
 				break;
 
 			default:
-				unavailable();
+				showMsg("UNAVALIABLE");
 				adminSubMenu_product();
 				break;
 			}
 		}
 	}
 
-
-	static void showProducts() {
-		clearScreen();
-		title(1);
-		user.showProducts();
-		productsMenu();
-	}
 
 	static void userMenu() {
 		boolean run = true;
@@ -329,7 +359,7 @@ public class Main extends User_Interface{
 			switch(input.nextLine()) {
 
 			case "0":
-				closeStore();
+				logout("user");
 				break;
 
 			case "1":
@@ -350,14 +380,14 @@ public class Main extends User_Interface{
 
 			case "9":
 				sleep(2000);
-				mainMenu();
+				homePage(true);
 				break;
 
 			case "":
 				break;
 
 			default:
-				unavailable();
+				showMsg("UNAVALIABLE");
 				userMenu();
 				break;
 			}
@@ -371,16 +401,13 @@ public class Main extends User_Interface{
 			switch(input.nextLine()) {
 
 			case "0":
-				closeStore();
+				logout("user");
 				break;
 
 			case "1":
 				user.addToCart();
-				sleep(2000);
-				clearScreen();
+				sleep(3000);
 				showProducts();
-				userMenu();
-				sleep(2000);
 				break;
 
 			case "2":
@@ -405,11 +432,12 @@ public class Main extends User_Interface{
 				break;
 
 			case "":
+				showProducts();
 				break;
 
 			default:
-				unavailable();
-				productsMenu();
+				showMsg("UNAVALIABLE");
+				showProducts();
 				break;
 			}
 		}
@@ -421,6 +449,8 @@ public class Main extends User_Interface{
 		switch(choice) {
 
 		case "0":
+			if(user.session())
+				logout("users");
 			closeStore();
 			break;
 
@@ -449,15 +479,18 @@ public class Main extends User_Interface{
 			break;
 
 		case "9":
-			sleep(2000);
-			showProducts();
+			sleep(1000);
+			if(user.session())
+				showProducts();
+			else
+				homePage(true);
 			break;
 
 		case "":
 			break;
 
 		default:
-			unavailable();
+			showMsg("UNAVALIABLE");
 			searchProductMenu();
 			break;
 		}
@@ -482,7 +515,10 @@ public class Main extends User_Interface{
 						searchProductMenu_sub(choice);
 				}
 				sleep(2000);
-				showProducts();
+				if(user.session())
+					showProducts();
+				else
+					homePage(false);
 			}
 			else
 				searchProductMenu();
@@ -499,7 +535,7 @@ public class Main extends User_Interface{
 			switch(input.nextLine()) {
 
 			case "0":
-				closeStore();
+				logout("user");
 				break;
 
 			case "1":
@@ -550,7 +586,7 @@ public class Main extends User_Interface{
 					if((decision.equalsIgnoreCase("y"))) {
 						user.removeUser();
 						sleep(3000);
-						mainMenu();
+						loginMenu();
 					}else {
 						sleep(2000);
 						profileMenu();
@@ -571,7 +607,7 @@ public class Main extends User_Interface{
 				break;
 
 			default:
-				unavailable();
+				showMsg("UNAVALIABLE");
 				profileMenu();
 				break;
 			}
@@ -589,13 +625,18 @@ public class Main extends User_Interface{
 			switch(input.nextLine()) {
 
 			case "0":
-				closeStore();
+				logout("user");
 				break;
 
 			case "1":
 				user.removeProduct();
 				sleep(2000);
 				cartMenu();
+				break;
+				
+			case "3":
+				sleep(2000);
+				showProducts();
 				break;
 
 			case "2":
@@ -609,19 +650,19 @@ public class Main extends User_Interface{
 				sleep(2000);
 				user.order();
 				sleep(4000);
+				showProducts();
 				break;
 
 			case "9":
 				user.readProducts();
 				sleep(2000);
-				showProducts();
 				break;
 
 			case "":
 				break;
 
 			default:
-				unavailable();
+				showMsg("UNAVALIABLE");
 				cartMenu();
 				break;
 			}
@@ -629,7 +670,7 @@ public class Main extends User_Interface{
 	}
 
 
-	static void mainMenu() {
+	static void loginMenu() {
 
 		boolean run = true;
 
@@ -672,18 +713,61 @@ public class Main extends User_Interface{
 				break;
 
 			default:
-				unavailable();
-				mainMenu();
+				showMsg("UNAVALIABLE");
+				loginMenu();
+				break;
+			}
+		}
+	}
+
+	static void homePage(boolean read) {
+
+		boolean run = true;
+
+		while(run) {
+			sleep(1000);
+			clearScreen();
+			title(1);
+			if(read)
+				user.readProducts();
+			user.showProducts();
+			menu(13);
+
+			switch(input.nextLine()) {
+
+			case "0":
+				closeStore();
+				break;
+
+			case "1":
+				sleep(1000);
+				searchProductMenu();
+				break;
+
+			case "2":
+				sleep(1000);
+				loginMenu();
+				break;
+				
+			case "3":
+				sleep(1000);
+				homePage(true);
+				break;
+
+			case "":
+				break;
+
+			default:
+				showMsg("UNAVALIABLE");
+				homePage(false);
 				break;
 			}
 		}
 	}
 
 
-
-
 	public static void main(String[] args) {
-		mainMenu();
+		homePage(true);
 	}
 
 }

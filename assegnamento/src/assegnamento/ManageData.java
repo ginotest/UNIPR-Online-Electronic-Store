@@ -37,10 +37,6 @@ public abstract class ManageData {
 
 	protected static ArrayList<ArrayList<String>> elements;
 
-	public static ArrayList<ArrayList<String>> getElements(){
-		return ManageData.elements;
-	}
-
 	public static void addData(String type, String[] content)  {
 		String[] xNodes = new String[5];
 		String xFile = "";

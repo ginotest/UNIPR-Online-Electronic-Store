@@ -70,7 +70,7 @@ public class User extends ManageData{
 		ArrayList<ArrayList<String>> product = getElements();
 		System.out.print("Which product number? : ");
 		int selection = input.nextInt()-1;
-		if(selection <= product.size()-1 && selection > 0) {
+		if(selection <= product.size()-1 && selection >= 0) {
 			if(Integer.parseInt(product.get(selection).get(4))>0) {
 				System.out.print("How many? ");
 				int quantity = input.nextInt();

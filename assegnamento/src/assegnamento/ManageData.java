@@ -79,7 +79,14 @@ public abstract class ManageData {
 			Element nList = doc.getDocumentElement();
 
 			newData = doc.createElement(type);
-
+			if(type=="restock") 
+				for(int i=0; i<2; i++) {
+					data = doc.createElement(xNodes[i]);
+					data.appendChild(doc.createTextNode(content[i]));
+					newData.appendChild(data);
+				}
+			
+			else
 			for(int i=0; i<4; i++) {
 				data = doc.createElement(xNodes[i]);
 				data.appendChild(doc.createTextNode(content[i]));
@@ -92,16 +99,16 @@ public abstract class ManageData {
 				data.appendChild(doc.createTextNode(content[4]));
 				newData.appendChild(data);
 			}
+			
 			if(type == "user") {
 				data = doc.createElement("address");
 				data.appendChild(doc.createTextNode("none"));
 				newData.appendChild(data);
-			}
-			if(type == "user") {
 				data = doc.createElement("cart");
 				data.appendChild(doc.createTextNode("none"));
 				newData.appendChild(data);
 			}
+			
 			if(type == "product") {
 				data = doc.createElement("quantity");
 				data.appendChild(doc.createTextNode("0"));
@@ -609,7 +616,7 @@ public abstract class ManageData {
 		Scanner input = new Scanner(System.in);
 		ArrayList<String> products = null;
 		String xFile = "";
-		String decision, id = "";
+		String decision, id = "", id2="";
 		int tempID=0, quantity = 0;
 		xFile = files[2]; 
 
@@ -650,7 +657,7 @@ public abstract class ManageData {
 						}
 					}
 				}
-				System.out.println("\nOrder confrimed to address '" + order[2] + "'");
+				System.out.println("\nOrder confirmed to address '" + order[2] + "'");
 				products = new ArrayList <> (Arrays.asList(order[3].split(",")));
 				break;
 			}
@@ -688,8 +695,8 @@ public abstract class ManageData {
 			}
 			else {
 				for (int j = 0; j < doc2.getElementsByTagName("product").getLength(); j++) {
-					id = getTextValue(doc2, "id", j);
-					if (id != null && !id.isEmpty() && id.equals(id)) {
+					id2 = getTextValue(doc2, "id", j);
+					if (id2 != null && !id2.isEmpty() && id2.equals(id)) {
 						quantity = Integer.parseInt(getTextValue(doc2, "quantity", j));
 						quantity = quantity - Integer.parseInt(products.get(i));
 						setTextValue(doc2, "quantity", j, Integer.toString(quantity), files[1]);

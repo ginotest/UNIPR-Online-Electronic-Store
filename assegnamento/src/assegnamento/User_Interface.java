@@ -93,9 +93,9 @@ public class User_Interface {
 			break;
 			
 		case 5:
-			System.out.println("------------------------\t-----------------------------");
-			System.out.println("| Type 1: Shop Products   |\t| Type 0:  LOGOUT   |");
-			System.out.println("------------------------\t-----------------------------\n");
+			System.out.println("------------------------\t----------------------------");
+			System.out.println("| Type 1: Shop Products|\t| Type 0:  LOGOUT          |");
+			System.out.println("------------------------\t----------------------------\n");
 			System.out.println("------------------------\t-----------------------------");
 			System.out.println("| Type 7: Go TO CART   |\t| Type 8:  Manage Profile   |");
 			System.out.println("------------------------\t-----------------------------\n");

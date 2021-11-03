@@ -378,11 +378,6 @@ public class Main extends User_Interface{
 				profileMenu();
 				break;
 
-			case "9":
-				sleep(2000);
-				homePage(true);
-				break;
-
 			case "":
 				break;
 
@@ -650,12 +645,13 @@ public class Main extends User_Interface{
 				sleep(2000);
 				user.order();
 				sleep(4000);
-				showProducts();
+				cartMenu();
 				break;
 
 			case "9":
 				user.readProducts();
 				sleep(2000);
+				userMenu();
 				break;
 
 			case "":

@@ -66,7 +66,7 @@ public class Admin extends ManageData{
 		for(int i=0; i<5;i++)
 			System.out.println(i+1 +") " + message[idx][i]);
 
-		System.out.print("What do you wanna change?  ");
+		System.out.print("What do you want to change?  ");
 		int n = input.nextInt()-1;
 		System.out.print("Write the new " + message[idx][n].toLowerCase() + ": ");
 		String content = input2.nextLine();

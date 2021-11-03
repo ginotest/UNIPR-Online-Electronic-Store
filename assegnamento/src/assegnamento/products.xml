@@ -33,14 +33,14 @@
         <name>iPencil</name>
         <manufacturer>Apple</manufacturer>
         <price>99.00</price>
-        <quantity>13</quantity>
+        <quantity>8</quantity>
     </product>
     <product>
         <id>43</id>
         <name>wireless Keyboard</name>
         <manufacturer>Apple</manufacturer>
         <price>59.00</price>
-        <quantity>15</quantity>
+        <quantity>0</quantity>
     </product>
     <product>
         <id>55</id>
@@ -68,6 +68,6 @@
         <name>K8 2017</name>
         <manufacturer>LG</manufacturer>
         <price>120</price>
-        <quantity>7</quantity>
+        <quantity>0</quantity>
     </product>
 </products>

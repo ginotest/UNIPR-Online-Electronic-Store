@@ -70,26 +70,20 @@ public class Employee extends ManageData {
 	}
 
 	public boolean showNotification() {
-		/*if(productsToRestock.size() == 0) {
+		productsToRestock = readAll("restock");
+		if(productsToRestock.size() == 0) {
 			System.out.print("\nNo Notification\n");
 			return false;
 		}
 
-		readAll("product");
-		ArrayList<ArrayList<String>> products = getElements();
-		System.out.format("%-25s%-25s%-25s\n","\tNAME", "MANUFACTURER", "QUANTITY");
+		System.out.format("%-25s%-25s%-25s\n","\tNAME", "MANUFACTURER");
 		for (int i = 0; i < productsToRestock.size(); i++) {
 			System.out.print("\n" + (i+1) + ")  ");
-			for (int j = 0; j < products.size(); j++) {
-				if(products.get(j).get(0).equals(productsToRestock.get(i))) {
-					System.out.format("%-25s",products.get(j).get(1));
-					System.out.format("%-25s",products.get(j).get(2));
-					System.out.format("%-25s",products.get(j).get(4));
-				}
-				System.out.println();
-			}
+			System.out.format("%-25s",productsToRestock.get(i).get(1));
+			System.out.format("%-25s",productsToRestock.get(i).get(2));
+			System.out.println();
 		}
-		System.out.println();	*/
+		System.out.println();
 		return true;
 	}
 

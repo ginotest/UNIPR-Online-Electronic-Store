@@ -80,7 +80,7 @@ public abstract class ManageData {
 
 			newData = doc.createElement(type);
 			if(type=="restock") 
-				for(int i=0; i<2; i++) {
+				for(int i=0; i<3; i++) {
 					data = doc.createElement(xNodes[i]);
 					data.appendChild(doc.createTextNode(content[i]));
 					newData.appendChild(data);

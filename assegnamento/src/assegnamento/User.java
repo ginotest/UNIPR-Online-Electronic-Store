@@ -6,6 +6,10 @@ import java.util.Scanner;
 public class User extends ManageData{
 	public Scanner input = new Scanner(System.in);
 	private static ArrayList<String> user;
+	
+	public User() {
+		user = new ArrayList<String>();
+	}
 
 	void register() {
 		String [] fields = new String[4];
@@ -67,10 +71,10 @@ public class User extends ManageData{
 	}
 
 	void addToCart() {
-		ArrayList<ArrayList<String>> product = getElements();
+		ArrayList<ArrayList<String>> product = elements;
 		System.out.print("Which product number? : ");
 		int selection = input.nextInt()-1;
-		if(selection <= product.size()-1 && selection > 0) {
+		if(selection <= product.size()-1 && selection >= 0) {
 			if(Integer.parseInt(product.get(selection).get(4))>0) {
 				System.out.print("How many? ");
 				int quantity = input.nextInt();
@@ -142,5 +146,15 @@ public class User extends ManageData{
 		default:
 			break;
 		}
+	}
+
+	public boolean session() {
+		if(user.isEmpty())
+			return false;
+		return true;
+	}
+
+	public void logout() {
+		user = new ArrayList<String>();
 	}
 }

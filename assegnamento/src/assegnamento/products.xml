@@ -5,7 +5,7 @@
         <name>Printer</name>
         <manufacturer>Epson</manufacturer>
         <price>53.90</price>
-        <quantity>94</quantity>
+        <quantity>0</quantity>
     </product>
     <product>
         <id>12</id>
@@ -26,21 +26,21 @@
         <name>Airpods</name>
         <manufacturer>Apple</manufacturer>
         <price>165.00</price>
-        <quantity>110</quantity>
+        <quantity>20</quantity>
     </product>
     <product>
         <id>66</id>
         <name>iPencil</name>
         <manufacturer>Apple</manufacturer>
         <price>99.00</price>
-        <quantity>13</quantity>
+        <quantity>8</quantity>
     </product>
     <product>
         <id>43</id>
         <name>wireless Keyboard</name>
         <manufacturer>Apple</manufacturer>
         <price>59.00</price>
-        <quantity>15</quantity>
+        <quantity>11</quantity>
     </product>
     <product>
         <id>55</id>
@@ -68,6 +68,6 @@
         <name>K8 2017</name>
         <manufacturer>LG</manufacturer>
         <price>120</price>
-        <quantity>0</quantity>
+        <quantity>18</quantity>
     </product>
 </products>

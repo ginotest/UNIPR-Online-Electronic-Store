@@ -7,33 +7,15 @@
         <cart>55,2</cart>
     </delivery>
     <delivery>
-        <id>#1766</id>
+        <id>#7876</id>
         <name>a aaadv</name>
         <address>Via delle patatoncole 14</address>
-        <cart>1276,2,12,3,55,3</cart>
+        <cart>43,15</cart>
     </delivery>
     <delivery>
-        <id>#9941</id>
+        <id>#1524</id>
         <name>a aaadv</name>
         <address>Via delle patatoncole 14</address>
-        <cart>9090,1</cart>
-    </delivery>
-    <delivery>
-        <id>#4010</id>
-        <name>vanessa kingsley</name>
-        <address>Via Montanara, 14</address>
-        <cart>12,1</cart>
-    </delivery>
-    <delivery>
-        <id>#1251</id>
-        <name>vanessa kingsley</name>
-        <address>Via Umberto Saba, 18</address>
-        <cart>15,2</cart>
-    </delivery>
-    <delivery>
-        <id>#8006</id>
-        <name>Andrew Lodero</name>
-        <address>Via carra, 9</address>
-        <cart>55,2,43,1</cart>
+        <cart>43,11</cart>
     </delivery>
 </deliveries>

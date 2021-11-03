@@ -28,23 +28,14 @@ public abstract class ManageData {
 	private static ArrayList<String> cquantities;
 
 
-	private static String[] files= {"employees.xml", "products.xml", "users.xml", "deliveries.xml"};
+	private static String[] files= {"employees.xml", "products.xml", "users.xml", "deliveries.xml", "restocks.xml"};
 	private static String[] users = {"name", "surname", "username", "password", "address", "cart"};
 	private static String[] product = {"id", "name", "manufacturer", "price", "quantity"};
 	private static String[] delivery = {"id", "name", "address", "cart"};
+	private static String[] restock = {"id", "name", "manufacturer"};
 	private static String[] employees = {"name", "surname", "username", "password", "admin"};
 
 	protected static ArrayList<ArrayList<String>> elements;
-	protected static ArrayList<String>productsToRestock;
-
-
-	public ManageData() {
-		productsToRestock = new ArrayList<String>();
-	}
-
-	public static ArrayList<ArrayList<String>> getElements(){
-		return ManageData.elements;
-	}
 
 	public static void addData(String type, String[] content)  {
 		String[] xNodes = new String[5];
@@ -67,6 +58,10 @@ public abstract class ManageData {
 			xFile = files[3];
 			xNodes = delivery;
 		}
+		else if(type=="restock") {
+			xFile = files[4];
+			xNodes = restock;
+		}
 
 		File fXmlFile = new File(".\\src\\assegnamento\\" + xFile);
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -80,12 +75,19 @@ public abstract class ManageData {
 			Element nList = doc.getDocumentElement();
 
 			newData = doc.createElement(type);
+			if(type=="restock") 
+				for(int i=0; i<3; i++) {
+					data = doc.createElement(xNodes[i]);
+					data.appendChild(doc.createTextNode(content[i]));
+					newData.appendChild(data);
+				}
 
-			for(int i=0; i<4; i++) {
-				data = doc.createElement(xNodes[i]);
-				data.appendChild(doc.createTextNode(content[i]));
-				newData.appendChild(data);
-			}
+			else
+				for(int i=0; i<4; i++) {
+					data = doc.createElement(xNodes[i]);
+					data.appendChild(doc.createTextNode(content[i]));
+					newData.appendChild(data);
+				}
 
 
 			if(type == "employee") {
@@ -93,16 +95,16 @@ public abstract class ManageData {
 				data.appendChild(doc.createTextNode(content[4]));
 				newData.appendChild(data);
 			}
+
 			if(type == "user") {
 				data = doc.createElement("address");
 				data.appendChild(doc.createTextNode("none"));
 				newData.appendChild(data);
-			}
-			if(type == "user") {
 				data = doc.createElement("cart");
 				data.appendChild(doc.createTextNode("none"));
 				newData.appendChild(data);
 			}
+
 			if(type == "product") {
 				data = doc.createElement("quantity");
 				data.appendChild(doc.createTextNode("0"));
@@ -121,7 +123,7 @@ public abstract class ManageData {
 	public static void removeData(String type, String elementToDelete) {
 		try {
 
-			String[][]  data = {{"employee", "product", "user", "delivery"},{ "username", "id","username", "id"}};
+			String[][]  data = {{"employee", "product", "user", "delivery", "restock"},{ "username", "id","username", "id", "id"}};
 			int selectType = 0;
 			String xFile ="";
 
@@ -140,6 +142,10 @@ public abstract class ManageData {
 			else if(type == "delivery") {
 				xFile = files[3];
 				selectType=3;
+			}
+			else if(type == "restock") {
+				xFile = files[4];
+				selectType=4;
 			}
 
 			File file = new File(".\\src\\assegnamento\\" + xFile);
@@ -246,7 +252,10 @@ public abstract class ManageData {
 		else if(type == "delivery") {
 			xFile = files[3]; idx=2;
 		}
-		String[][] xElements= {users, product, delivery, employees};
+		else if(type == "restock") {
+			xFile = files[4]; idx=4;
+		}
+		String[][] xElements= {users, product, delivery, employees, restock};
 
 		Element doc = docBuilder(xFile);
 
@@ -254,35 +263,45 @@ public abstract class ManageData {
 
 			array = new ArrayList<String>();
 
-			for (int j = 0; j < 5; j++) {
-				if ((type != "delivery")|| ((type == "delivery" )  && j < 4) )
+			if(type == "restock") {
+				for (int j = 0; j < 3; j++) {
 					data = getTextValue(doc, xElements[idx][j], i);
-				if ((data != null) && (!data.isEmpty())) {
-					if(type == "product" && xElements[idx][j].equals("id")) {
+					if ((data != null) && (!data.isEmpty())) {
 						array.add(data);
-						cids.add(data);
 					}
-					else if(type == "product" && xElements[idx][j].equals("name")) {
-						array.add(data);
-						cnames.add(data);
-					}
-					else if(type == "product" && xElements[idx][j].equals("manufacturer")) {
-						array.add(data);
-						cmanufacturers.add(data);
-					}
-					else if(type == "product" && xElements[idx][j].equals("price")) {
-						array.add("$"+ data);
-						cprices.add(data);
-					}
-					else if(type == "product" && xElements[idx][j].equals("quantity")) {
-						array.add(data);
-						cquantities.add(data);
-					}
-					else
-						array.add(data);
-
 				}
+
 			}
+			else
+				for (int j = 0; j < 5; j++) {
+					if ((type != "delivery")|| ((type == "delivery" )  && j < 4) )
+						data = getTextValue(doc, xElements[idx][j], i);
+					if ((data != null) && (!data.isEmpty())) {
+						if(type == "product" && xElements[idx][j].equals("id")) {
+							array.add(data);
+							cids.add(data);
+						}
+						else if(type == "product" && xElements[idx][j].equals("name")) {
+							array.add(data);
+							cnames.add(data);
+						}
+						else if(type == "product" && xElements[idx][j].equals("manufacturer")) {
+							array.add(data);
+							cmanufacturers.add(data);
+						}
+						else if(type == "product" && xElements[idx][j].equals("price")) {
+							array.add("$"+ data);
+							cprices.add(data);
+						}
+						else if(type == "product" && xElements[idx][j].equals("quantity")) {
+							array.add(data);
+							cquantities.add(data);
+						}
+						else
+							array.add(data);
+
+					}
+				}
 
 			if(type == "employee") {
 				isAdmin = getTextValue(doc, "admin", i);
@@ -603,9 +622,10 @@ public abstract class ManageData {
 		Scanner input = new Scanner(System.in);
 		ArrayList<String> products = null;
 		String xFile = "";
-		String decision, id = "";
-		int tempID=0, quantity = 0;
+		String decision, id = "", id2="", keep="", keepOk="";
+		int tempID=0, quantity = 0, idx =0, idxRemove=0;
 		xFile = files[2]; 
+		int test=0;
 
 		Element doc = docBuilder(xFile);
 
@@ -619,6 +639,7 @@ public abstract class ManageData {
 					System.out.println("The cart is empty! Please add something to the cart.");
 					return;
 				}
+
 				if(order[2].equals("none")) {
 					System.out.print("The address hasn't been set, please specify an address: ");
 					order[2] = input.nextLine();
@@ -630,7 +651,8 @@ public abstract class ManageData {
 					}
 				}
 				else {
-					System.out.println("\nThe products will be shipped to '" + order[2] + "'");
+
+				System.out.println("\nThe products will be shipped to '" + order[2] + "'");
 					System.out.print("\nDo you want to send them to this address? (Y/N): ");
 					decision = input.nextLine();
 					if((!decision.equalsIgnoreCase("y"))) {
@@ -644,11 +666,96 @@ public abstract class ManageData {
 						}
 					}
 				}
-				System.out.println("\nOrder confrimed to address '" + order[2] + "'");
 				products = new ArrayList <> (Arrays.asList(order[3].split(",")));
 				break;
 			}
 		}
+
+		readAll("product");
+		for(int i = 0; i < products.size();i++) {
+			if(i %2 ==0) {
+				idx = cids.indexOf(products.get(i));
+				System.out.println(cnames.get(idx));
+				System.out.println(products.get(i+1) + " and "+ cquantities.get(idx));
+			}
+			else {
+
+				if(Integer.parseInt(products.get(i)) > Integer.parseInt(cquantities.get(idx))){
+
+					if(Integer.parseInt(cquantities.get(idx)) == 0) {
+
+						System.out.print("\n"+ cmanufacturers.get(idx) + " "+ cnames.get(idx) + " is currently out of stock, therefore it cannot be sent. \nDo you want to keep it in the cart? (Y/N): ");
+						decision = input.nextLine();
+						if((decision.equalsIgnoreCase("y"))) {
+							if(keep.equals(""))
+								keep+=cids.get(idx)+","+products.get(i);
+							else
+								keep+="," + cids.get(idx)+","+products.get(i);
+						}
+						test+=2;
+						products.remove(i-1);
+						products.remove(i-1);
+						order[3] = products.toString().replace("[", "").replace("]", "").replace(" ", "");
+
+					}
+				
+					else {
+
+						System.out.print("\nUnfortunately, there are only " + cquantities.get(idx) + " "+ cmanufacturers.get(idx) + " "+ cnames.get(idx) + " available. \nDo you still wish to purchase it? (Y/N):  " );
+						decision = input.nextLine();
+						if((decision.equalsIgnoreCase("y"))) {
+			
+							products.set(i, cquantities.get(idx));
+							order[3] = products.toString().replace("[", "").replace("]", "").replace(" ", "");
+
+						}
+						else {
+							if(keep.equals(""))
+								keep+=cids.get(idx)+","+products.get(i);
+							else
+								keep+="," + cids.get(idx)+","+products.get(i);
+							test+=2;
+							products.remove(i-1);
+							products.remove(i-1);
+							order[3] = products.toString().replace("[", "").replace("]", "").replace(" ", "");
+						}
+					}
+				
+
+				}
+				
+				else {					
+					if(keepOk.equals(""))
+						keepOk+=cids.get(idx)+","+products.get(i);
+					else
+						keepOk+="," + cids.get(idx)+","+products.get(i);					
+				}
+				i-=test;
+				test=0;
+
+			}
+		}
+
+		System.out.print("Do you still want to proceed with the order of the remaining available items?(Y/N): ");
+		decision = input.nextLine();
+		if((!decision.equalsIgnoreCase("y"))) { 
+
+			order[3]=""; 
+			if(!keep.equals(""))
+			keep+=","+keepOk;
+			else
+				keep+=keepOk;
+		}
+		
+		if(keep.equals(""))
+			editData("user",4 ,user , "replacenone");
+			else
+				editData("user",4 ,user , "replace" + keep);
+		if(order[3].equals("")) {
+			System.out.println("The order has been cancelled.");
+			return;
+		}
+
 
 		for(int j = 0; j < products.size()-1; j++) {
 			tempID = Integer.parseInt(products.get(j)) + Integer.parseInt(products.get(j+1));
@@ -682,13 +789,18 @@ public abstract class ManageData {
 			}
 			else {
 				for (int j = 0; j < doc2.getElementsByTagName("product").getLength(); j++) {
-					id = getTextValue(doc2, "id", j);
-					if (id != null && !id.isEmpty() && id.equals(id)) {
+					id2 = getTextValue(doc2, "id", j);
+					if (id2 != null && !id2.isEmpty() && id2.equals(id)) {
 						quantity = Integer.parseInt(getTextValue(doc2, "quantity", j));
 						quantity = quantity - Integer.parseInt(products.get(i));
 						setTextValue(doc2, "quantity", j, Integer.toString(quantity), files[1]);
-						if(quantity == 0)
-							productsToRestock.add(id);
+						if(quantity == 0) {
+							String [] fields = new String[3];
+							fields[0] = id;
+							fields[1] = getTextValue(doc2, "name", j);
+							fields[2] = getTextValue(doc2, "manufacturer", j);
+							addData("restock", fields);
+						}
 						break;
 					}
 				}
@@ -696,7 +808,7 @@ public abstract class ManageData {
 		}
 
 
-		editData("user",4 ,user , "replacenone");
+		System.out.println("\nOrder confirmed to address '" + order[2] + "'");
 		addData("delivery", order);
 	}
 

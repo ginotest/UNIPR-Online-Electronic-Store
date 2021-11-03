@@ -22,7 +22,7 @@
         <username>a</username>
         <password>a</password>
         <address>Via delle patatoncole 14</address>
-        <cart>none</cart>
+        <cart>9090,18</cart>
     </user>
     <user>
         <name>Andrew</name>
@@ -30,6 +30,14 @@
         <username>Allo134</username>
         <password>password</password>
         <address>Via carra, 9</address>
+        <cart>none</cart>
+    </user>
+    <user>
+        <name>Daniella</name>
+        <surname>Lorenzo</surname>
+        <username>ella</username>
+        <password>ella20</password>
+        <address>none</address>
         <cart>none</cart>
     </user>
 </users>

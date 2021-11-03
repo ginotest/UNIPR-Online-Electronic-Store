@@ -267,6 +267,16 @@ public abstract class ManageData {
 
 			array = new ArrayList<String>();
 
+			if(type == "restock") {
+				for (int j = 0; j < 3; j++) {
+						data = getTextValue(doc, xElements[idx][j], i);
+					if ((data != null) && (!data.isEmpty())) {
+							array.add(data);
+					}
+				}
+				
+			}
+			else
 			for (int j = 0; j < 5; j++) {
 				if ((type != "delivery")|| ((type == "delivery" )  && j < 4) )
 					data = getTextValue(doc, xElements[idx][j], i);

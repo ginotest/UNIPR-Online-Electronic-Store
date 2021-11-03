@@ -76,7 +76,7 @@ public class Employee extends ManageData {
 			return false;
 		}
 
-		System.out.format("%-25s%-25s%-25s\n","\tNAME", "MANUFACTURER");
+		System.out.format("%-25s%-25s\n","\tNAME", "MANUFACTURER");
 		for (int i = 0; i < productsToRestock.size(); i++) {
 			System.out.print("\n" + (i+1) + ")  ");
 			System.out.format("%-25s",productsToRestock.get(i).get(1));

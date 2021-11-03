@@ -6,6 +6,7 @@ public class Employee extends ManageData {
 
 	private static ArrayList<String> employee;
 	protected static ArrayList<ArrayList<String>> orders;
+	protected static ArrayList<ArrayList<String>> productsToRestock;
 
 	public boolean login(String username, String password) {
 		employee = getProfile("employee", username);
@@ -69,7 +70,7 @@ public class Employee extends ManageData {
 	}
 
 	public boolean showNotification() {
-		if(productsToRestock.size() == 0) {
+		/*if(productsToRestock.size() == 0) {
 			System.out.print("\nNo Notification\n");
 			return false;
 		}
@@ -88,14 +89,14 @@ public class Employee extends ManageData {
 				System.out.println();
 			}
 		}
-		System.out.println();	
+		System.out.println();	*/
 		return true;
 	}
 
 	public void restock(int select, int quantity) {
-		if(editData("product", 4, productsToRestock.get(select), Integer.toString(quantity)))
+		/*if(editData("product", 4, productsToRestock.get(select), Integer.toString(quantity)))
 			System.out.println("Product successfully restocked.");
 		else 
-			System.out.println("Error in restocking Product.");
+			System.out.println("Error in restocking Product.");*/
 	}
 }

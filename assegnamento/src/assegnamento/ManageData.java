@@ -28,19 +28,14 @@ public abstract class ManageData {
 	private static ArrayList<String> cquantities;
 
 
-	private static String[] files= {"employees.xml", "products.xml", "users.xml", "deliveries.xml"};
+	private static String[] files= {"employees.xml", "products.xml", "users.xml", "deliveries.xml", "restocks.xml"};
 	private static String[] users = {"name", "surname", "username", "password", "address", "cart"};
 	private static String[] product = {"id", "name", "manufacturer", "price", "quantity"};
 	private static String[] delivery = {"id", "name", "address", "cart"};
+	private static String[] restock = {"id", "name", "manufacturer"};
 	private static String[] employees = {"name", "surname", "username", "password", "admin"};
 
 	protected static ArrayList<ArrayList<String>> elements;
-	protected static ArrayList<String>productsToRestock;
-
-
-	public ManageData() {
-		productsToRestock = new ArrayList<String>();
-	}
 
 	public static ArrayList<ArrayList<String>> getElements(){
 		return ManageData.elements;
@@ -66,6 +61,10 @@ public abstract class ManageData {
 		else if(type=="delivery") {
 			xFile = files[3];
 			xNodes = delivery;
+		}
+		else if(type=="restock") {
+			xFile = files[4];
+			xNodes = restock;
 		}
 
 		File fXmlFile = new File(".\\src\\assegnamento\\" + xFile);
@@ -121,7 +120,7 @@ public abstract class ManageData {
 	public static void removeData(String type, String elementToDelete) {
 		try {
 
-			String[][]  data = {{"employee", "product", "user", "delivery"},{ "username", "id","username", "id"}};
+			String[][]  data = {{"employee", "product", "user", "delivery", "restock"},{ "username", "id","username", "id", "id"}};
 			int selectType = 0;
 			String xFile ="";
 
@@ -140,6 +139,10 @@ public abstract class ManageData {
 			else if(type == "delivery") {
 				xFile = files[3];
 				selectType=3;
+			}
+			else if(type == "restock") {
+				xFile = files[4];
+				selectType=4;
 			}
 
 			File file = new File(".\\src\\assegnamento\\" + xFile);
@@ -246,7 +249,10 @@ public abstract class ManageData {
 		else if(type == "delivery") {
 			xFile = files[3]; idx=2;
 		}
-		String[][] xElements= {users, product, delivery, employees};
+		else if(type == "restock") {
+			xFile = files[4]; idx=4;
+		}
+		String[][] xElements= {users, product, delivery, employees, restock};
 
 		Element doc = docBuilder(xFile);
 
@@ -687,8 +693,13 @@ public abstract class ManageData {
 						quantity = Integer.parseInt(getTextValue(doc2, "quantity", j));
 						quantity = quantity - Integer.parseInt(products.get(i));
 						setTextValue(doc2, "quantity", j, Integer.toString(quantity), files[1]);
-						if(quantity == 0)
-							productsToRestock.add(id);
+						if(quantity == 0) {
+							String [] fields = new String[3];
+							fields[0] = id;
+							fields[1] = getTextValue(doc2, "name", j);
+							fields[2] = getTextValue(doc2, "manufacturer", j);
+							addData("restock", fields);
+						}
 						break;
 					}
 				}

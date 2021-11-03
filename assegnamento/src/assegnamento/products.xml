@@ -5,7 +5,7 @@
         <name>Printer</name>
         <manufacturer>Epson</manufacturer>
         <price>53.90</price>
-        <quantity>94</quantity>
+        <quantity>87</quantity>
     </product>
     <product>
         <id>12</id>
@@ -68,6 +68,6 @@
         <name>K8 2017</name>
         <manufacturer>LG</manufacturer>
         <price>120</price>
-        <quantity>0</quantity>
+        <quantity>7</quantity>
     </product>
 </products>

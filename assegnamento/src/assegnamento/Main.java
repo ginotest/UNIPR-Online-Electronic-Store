@@ -112,7 +112,7 @@ public class Main extends User_Interface{
 
 			case "9":
 				sleep(2000);
-				employeeMenu();
+				mainMenu();
 				break;
 
 			case "":
@@ -136,8 +136,9 @@ public class Main extends User_Interface{
 				sleep(1000);
 				System.out.print("\nWhat number do you want to ship? ");
 				String select = input.nextLine();
+				sleep(2000);
 				employee.shipProduct(Integer.parseInt(select));
-				sleep(5000);
+				sleep(4000);
 
 			case "9":
 				sleep(2000);

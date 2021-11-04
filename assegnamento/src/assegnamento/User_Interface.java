@@ -3,16 +3,18 @@ package assegnamento;
 import java.util.Scanner;
 
 public class User_Interface {
-	
+
 	static Scanner input = new Scanner(System.in);
-	
+
 	protected static void clearScreen() {  
 		for (int i = 0; i < 100; ++i) System.out.println();
 	}  
-	
-	protected static void title(final int type) {  
+
+	protected static void title(final String type) {  
+
 		switch(type) {
-		case 0:
+
+		case "login":
 			System.out.println("\t  _      ____   _____ _____ _   _ ");
 			System.out.println("\t | |    / __ \\ / ____|_   _| \\ | |");
 			System.out.println("\t | |   | |  | | |  __  | | |  \\| |");
@@ -20,7 +22,8 @@ public class User_Interface {
 			System.out.println("\t | |___| |__| | |__| |_| |_| |\\  |");
 			System.out.println("\t |______\\____/ \\_____|_____|_| \\_|\n");
 			break;
-		case 1:
+
+		case "store":
 			System.out.println("\t      _____ _                 ");
 			System.out.println("\t     / ____| |                ");
 			System.out.println("\t    | (___ | |_ ___  _ __ ___ ");
@@ -28,7 +31,8 @@ public class User_Interface {
 			System.out.println("\t     ____) | || (_) | | |  __/");
 			System.out.println("\t    |_____/ \\__\\___/|_|  \\___|\n");
 			break;
-		case 2:
+
+		case "adminArea":
 			System.out.println("              _           _                                 ");
 			System.out.println("     /\\      | |         (_)           /\\                   ");
 			System.out.println("    /  \\   __| |_ __ ___  _ _ __      /  \\   _ __ ___  __ _ ");
@@ -36,7 +40,8 @@ public class User_Interface {
 			System.out.println("  / ____ | (_| | | | | | | | | | |  / ____ \\| | |  __| (_| |");
 			System.out.println(" /_/    \\_\\__,_|_| |_| |_|_|_| |_| /_/    \\_|_|  \\___|\\__,_|\n");
 			break;
-		case 3:
+
+		case "cart":
 			System.out.println("\t\t\t   _____          _____ _______ ");
 			System.out.println("\t\t\t  / ____|   /\\   |  __ \\__   __|");
 			System.out.println("\t\t\t | |       /  \\  | |__) | | |   ");
@@ -45,12 +50,14 @@ public class User_Interface {
 			System.out.println("\t\t\t  \\_____/_/    \\_\\_|  \\_\\ |_|   \n");
 			break;
 		}
-		
+
 	}  
-	protected static void menu(final int type) {
+
+	protected static void menu(final String type) {
 
 		switch(type) {
-		case 1:
+
+		case "loginMenu":
 			System.out.println("\t\t    ~{{USER}}~");
 			System.out.println("-----------------\t\t-------------------");
 			System.out.println("| Type 1: LOGIN |\t\t| Type 2: REGISTER |");
@@ -64,7 +71,8 @@ public class User_Interface {
 			System.out.println("-----------------\t\t----------------");
 			System.out.print("\nWhat do you want to do?  ");
 			break;
-		case 2:
+
+		case "adminMenu":
 			System.out.println("------------------------------\t\t--------------------------------");
 			System.out.println("| Type 1: Manage Users       |\t\t| Type 2: Manage Products Type |");
 			System.out.println("------------------------------\t\t--------------------------------\n");
@@ -73,7 +81,8 @@ public class User_Interface {
 			System.out.println("------------------------------\t\t--------------------------------");
 			System.out.print("\nWhat do you want to do?  ");
 			break;
-		case 3:
+
+		case "adminManageUsersMenu":
 			System.out.println("--------------------\t---------------------\t-----------------------");
 			System.out.println("| Type 1: Add User |\t| Type 2: Edit User |\t| Type 3: Delete User |");
 			System.out.println("--------------------\t---------------------\t-----------------------");
@@ -82,7 +91,8 @@ public class User_Interface {
 			System.out.println("------------------------------------\t-------------------\n");
 			System.out.print("\nWhat do you want to do?  ");
 			break;
-		case 4:
+
+		case "adminManageProductsTypeMenu":
 			System.out.println("----------------------------\t-------------------------------");
 			System.out.println("| Type 1: Add Product Type |\t| Type 2: Remove Product Type |");
 			System.out.println("----------------------------\t-------------------------------");
@@ -91,8 +101,8 @@ public class User_Interface {
 			System.out.println("------------------------------------\t-------------------\n");
 			System.out.print("\nWhat do you want to do?  ");
 			break;
-			
-		case 5:
+
+		case "userMenu":
 			System.out.println("------------------------\t----------------------------");
 			System.out.println("| Type 1: Shop Products|\t| Type 0:  LOGOUT          |");
 			System.out.println("------------------------\t----------------------------\n");
@@ -101,8 +111,8 @@ public class User_Interface {
 			System.out.println("------------------------\t-----------------------------\n");
 			System.out.print("\nWhat do you want to do?  ");
 			break;
-			
-		case 6:
+
+		case "productsMenu":
 			System.out.println("--------------------------------\t------------------------------");
 			System.out.println("| Type 1: Add Product to Cart  |\t| Type 2: Show all Products  |");
 			System.out.println("--------------------------------\t------------------------------\n");
@@ -114,8 +124,8 @@ public class User_Interface {
 			System.out.println("--------------------------------\t--------------------");
 			System.out.print("\nWhat do you want to do?  ");
 			break;
-			
-		case 7:
+
+		case "searchProductMenu":
 			System.out.print("\n               SEARCH PRODUCTS           \n\n");
 			System.out.println("------------------------------\t\t--------------------------------");
 			System.out.println("| Type 1: by NAME             |\t\t| Type 2: by MANUFACTURER      |");
@@ -129,8 +139,8 @@ public class User_Interface {
 			System.out.print("\nEnter multiple choice separated by space\n");
 			System.out.print("\nWhat do you want to do?  ");
 			break;
-		
-		case 8:
+
+		case "manageProfileMenu":
 			System.out.println("------------------------------\t\t--------------------------------");
 			System.out.println("| Type 1: change USERNAME    |\t\t| Type 2: change PASSWORD      |");
 			System.out.println("------------------------------\t\t--------------------------------");
@@ -142,8 +152,8 @@ public class User_Interface {
 			System.out.println("----------------------------------\t\t--------------------");
 			System.out.print("\nWhat do you want to do?  ");
 			break;
-			
-		case 9:
+
+		case "cartMenu":
 			System.out.println("------------------------------\t------------------------------");
 			System.out.println("| Type 1: Remove product     |\t|   Type 2: Change quantity  |");
 			System.out.println("------------------------------\t------------------------------");
@@ -155,8 +165,8 @@ public class User_Interface {
 			System.out.println("-----------------------------------\t----------------------");
 			System.out.print("\nWhat do you want to do?  ");
 			break;
-			
-		case 10:
+
+		case "employeeMenu":
 			System.out.println("----------------------------\t-----------------------------");
 			System.out.println("| Type 1: Orders to Ship   |\t|   Type 2: Notifications   |");
 			System.out.println("----------------------------\t-----------------------------\n");
@@ -165,8 +175,8 @@ public class User_Interface {
 			System.out.println("		-------------------");
 			System.out.print("\nWhat do you want to do?  ");
 			break;
-			
-		case 11:
+
+		case "notificationMenu":
 			System.out.println("               ----------------------------");
 			System.out.println("              |   Type 1: Restock Product  |");
 			System.out.println("               ----------------------------\n");
@@ -175,8 +185,8 @@ public class User_Interface {
 			System.out.println("---------------------------\t----------------------");
 			System.out.print("\nWhat do you want to do?  ");
 			break;
-			
-		case 12:
+
+		case "ordersMenu":
 			System.out.println("------------------------\t-----------------------------------");
 			System.out.println("| Type 1: Ship Product |\t| Type 9: RETURN TO PREVIOUS MENU |");
 			System.out.println("------------------------\t-----------------------------------\n");
@@ -185,8 +195,8 @@ public class User_Interface {
 			System.out.println("                 ------------------        ");
 			System.out.print("\nWhat do you want to do?  ");	
 			break;
-			
-		case 13:
+
+		case "homePageMenu":
 			System.out.println("---------------------------\t-----------------");
 			System.out.println("| Type 1: search Products |\t| Type 2: LOGIN |");
 			System.out.println("---------------------------\t-----------------");
@@ -196,6 +206,6 @@ public class User_Interface {
 			System.out.print("\nWhat do you want to do?  ");	
 			break;
 		}
-		
+
 	}
 }

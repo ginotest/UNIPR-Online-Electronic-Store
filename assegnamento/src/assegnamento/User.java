@@ -6,24 +6,29 @@ import java.util.Scanner;
 public class User extends ManageData{
 	public Scanner input = new Scanner(System.in);
 	private static ArrayList<String> user;
-	
+
 	public User() {
 		user = new ArrayList<String>();
 	}
 
 	void register() {
+
 		String [] fields = new String[4];
 		String[] message = {"Name: ", "Surname: ", "Username: ", "Password: "};
 		System.out.println();
+
 		for(int i=0; i<4; i++) {
+
 			System.out.print(message[i]);
 			fields[i] = input.next();
+
 			if(i == 2)
 				if(exist("user", fields[i])) {
 					System.out.println("\nUsername already exists\n");
 					i--;
 				}
 		}
+
 		addData("user", fields);	
 		user = new ArrayList<String>();
 		user.add(fields[2]);
@@ -31,13 +36,16 @@ public class User extends ManageData{
 	}
 
 	boolean Login(String username, String password) {
+
 		user = getProfile("user", username);
+
 		if(user.isEmpty())
 			return false;
 		else if(!user.isEmpty() && ((user.get(1) != null) && (user.get(1).equals(password))))
 			return true;
 		else
 			user.clear();
+
 		return false;
 	}
 
@@ -71,14 +79,19 @@ public class User extends ManageData{
 	}
 
 	void addToCart() {
+
 		ArrayList<ArrayList<String>> product = elements;
+
 		System.out.print("Which product number? : ");
 		int selection = input.nextInt()-1;
 		if(selection <= product.size()-1 && selection >= 0) {
+
 			if(Integer.parseInt(product.get(selection).get(4))>0) {
+
 				System.out.print("How many? ");
 				int quantity = input.nextInt();
 				if(quantity <= Integer.parseInt(product.get(selection).get(4))) {
+
 					System.out.println("You have added: " + quantity + " " + product.get(selection).get(2) + " " + product.get(selection).get(1) + " to the cart.");
 					editData("user", 4, user.get(0), product.get(selection).get(0) + "," + quantity);
 				}
@@ -101,7 +114,9 @@ public class User extends ManageData{
 	}
 
 	void changeUsername(String newUsername){
+
 		if(!exist("user", newUsername)) {
+
 			editData("user", 0, user.get(0), newUsername);
 			user.set(0, newUsername);
 			System.out.println("Username changed");
@@ -116,7 +131,9 @@ public class User extends ManageData{
 	}
 
 	void changePassword(String oldPassword, String newPassword){
+
 		if (Login( user.get(0), oldPassword)) {
+
 			editData("user", 1, user.get(0), newPassword);
 			System.out.println("Password changed");
 		}
@@ -126,7 +143,9 @@ public class User extends ManageData{
 	}
 
 	void searchProducts(String type, String str) {
+
 		switch(type) {
+
 		case "name":
 			filterList(1, str);
 			break;

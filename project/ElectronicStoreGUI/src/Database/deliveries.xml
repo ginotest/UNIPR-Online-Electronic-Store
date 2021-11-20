@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<deliveries>
+    <delivery>
+        <id>#15224</id>
+        <name>Daniella Lorenzo</name>
+        <address>via carra, 8</address>
+        <cart>55,1,9090,2</cart>
+    </delivery>
+    <delivery>
+        <id>#5554</id>
+        <name>Giuggiolino Piattola</name>
+        <address>via russo, 19</address>
+        <cart>1276,1,12,1</cart>
+    </delivery>
+    <delivery>
+        <id>#9397</id>
+        <name>Daniella Lorenzo</name>
+        <address>Via delle frattaglie 82</address>
+        <cart>12,9,66,8</cart>
+    </delivery>
+</deliveries>

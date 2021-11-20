@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<users>
+    <user>
+        <name>vanessa</name>
+        <surname>kingsley</surname>
+        <username>vane</username>
+        <password>1234</password>
+        <address>Via Giuseppe Rossi, 13</address>
+        <cart>9090,3</cart>
+    </user>
+    <user>
+        <name>Giuggiolino</name>
+        <surname>Piattola</surname>
+        <username>Giupi1234</username>
+        <password>patata</password>
+        <address>via russo, 19</address>
+        <cart>55,2</cart>
+    </user>
+    <user>
+        <name>Andrew</name>
+        <surname>Lodero</surname>
+        <username>Allo134</username>
+        <password>andy97</password>
+        <address>Via carra, 9</address>
+        <cart>55,19,9090,4,15,3,12,5</cart>
+    </user>
+    <user>
+        <name>Daniella</name>
+        <surname>Lorenzo</surname>
+        <username>ella</username>
+        <password>ella20</password>
+        <address>Via delle frattaglie 82</address>
+        <cart>69,1</cart>
+    </user>
+</users>

@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"ElectronicStore","l":"Admin"},{"l":"All Classes","u":"allclasses-index.html"},{"p":"ElectronicStore","l":"Client"},{"p":"ElectronicStore","l":"Employee"},{"p":"ElectronicStore","l":"Main"},{"p":"ElectronicStore","l":"ManageData"},{"p":"ElectronicStore","l":"User_Interface"}];updateSearchResults();

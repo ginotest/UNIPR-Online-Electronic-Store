@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<products>
+    <product>
+        <id>69</id>
+        <name>Printer</name>
+        <manufacturer>Epson</manufacturer>
+        <price>53.90</price>
+        <quantity>0</quantity>
+    </product>
+    <product>
+        <id>12</id>
+        <name>MateBook</name>
+        <manufacturer>Huawei</manufacturer>
+        <price>790.00</price>
+        <quantity>109</quantity>
+    </product>
+    <product>
+        <id>55</id>
+        <name>Printer</name>
+        <manufacturer>Samsung</manufacturer>
+        <price>99.90</price>
+        <quantity>114</quantity>
+    </product>
+    <product>
+        <id>70</id>
+        <name>Airpods</name>
+        <manufacturer>Apple</manufacturer>
+        <price>165.00</price>
+        <quantity>20</quantity>
+    </product>
+    <product>
+        <id>66</id>
+        <name>iPencil</name>
+        <manufacturer>Apple</manufacturer>
+        <price>99.00</price>
+        <quantity>8</quantity>
+    </product>
+    <product>
+        <id>43</id>
+        <name>wireless Keyboard</name>
+        <manufacturer>Apple</manufacturer>
+        <price>59.00</price>
+        <quantity>11</quantity>
+    </product>
+    <product>
+        <id>55</id>
+        <name>earbuds</name>
+        <manufacturer>Samsumg</manufacturer>
+        <price>119.00</price>
+        <quantity>115</quantity>
+    </product>
+    <product>
+        <id>15</id>
+        <name>Wireless Speaker</name>
+        <manufacturer>Xiaomi</manufacturer>
+        <price>54.45</price>
+        <quantity>108</quantity>
+    </product>
+    <product>
+        <id>1276</id>
+        <name>Wireless Keyboard</name>
+        <manufacturer>Omoton</manufacturer>
+        <price>8.34</price>
+        <quantity>113</quantity>
+    </product>
+    <product>
+        <id>9090</id>
+        <name>K8 2017</name>
+        <manufacturer>LG</manufacturer>
+        <price>120</price>
+        <quantity>8</quantity>
+    </product>
+    <product>
+        <id>9091</id>
+        <name>HP Spectre</name>
+        <manufacturer>Samsung</manufacturer>
+        <price>1799.98</price>
+        <quantity>3</quantity>
+    </product>
+</products>

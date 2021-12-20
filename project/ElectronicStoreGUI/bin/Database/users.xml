@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <users>
     <user>
-        <name>vanessa</name>
-        <surname>kingsley</surname>
+        <name>Vanessa</name>
+        <surname>Kingsley</surname>
         <username>vane</username>
-        <password>1234</password>
-        <address>Via Giuseppe Rossi, 13</address>
-        <cart>9090,3</cart>
-    </user>
-    <user>
-        <name>Giuggiolino</name>
-        <surname>Piattola</surname>
-        <username>Giupi1234</username>
-        <password>patata</password>
-        <address>via russo, 19</address>
-        <cart>55,2</cart>
+        <password>123</password>
+        <address>Via Giuseppe Rossi n. 2</address>
+        <cart>426,2,15,1</cart>
     </user>
     <user>
         <name>Andrew</name>
         <surname>Lodero</surname>
         <username>Allo134</username>
         <password>andy97</password>
-        <address>Via carra, 9</address>
-        <cart>55,19,9090,4,15,3,12,5</cart>
+        <address>Via Elena n. 83</address>
+        <cart>66,3,9090,4</cart>
     </user>
     <user>
         <name>Daniella</name>
         <surname>Lorenzo</surname>
         <username>ella</username>
         <password>ella20</password>
-        <address>Via delle frattaglie 82</address>
-        <cart>69,1</cart>
+        <address>Via delle frattaglie n. 82</address>
+        <cart>none</cart>
+    </user>
+    <user>
+        <name>Giancarlo</name>
+        <surname>Bianchi</surname>
+        <username>giapi1295</username>
+        <password>Resistor1823@</password>
+        <address>Via Montanara n. 4</address>
+        <cart>none</cart>
     </user>
 </users>

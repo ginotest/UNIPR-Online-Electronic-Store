@@ -9,9 +9,9 @@
     </employee>
     <employee>
         <name>Andrea</name>
-        <surname>Filippino</surname>
-        <username>andy</username>
-        <password>patata</password>
+        <surname>Casciana</surname>
+        <username>Didgeridoo97</username>
+        <password>KhopKhun2556@</password>
         <admin>true</admin>
     </employee>
     <employee>
@@ -30,10 +30,10 @@
     </employee>
     <employee>
         <name>Luca</name>
-        <surname>Pierolino</surname>
-        <username>cascione</username>
-        <password>wiki</password>
-        <admin>false</admin>
+        <surname>Castellani</surname>
+        <username>Caste1224</username>
+        <password>Monolith226@</password>
+        <admin>true</admin>
     </employee>
     <employee>
         <name>Gioseppino</name>
@@ -47,6 +47,13 @@
         <surname>Roberto</surname>
         <username>maria98</username>
         <password>mariarob</password>
+        <admin>false</admin>
+    </employee>
+    <employee>
+        <name>Valerio</name>
+        <surname>Rosinoni</surname>
+        <username>valros92</username>
+        <password>Valkyrie2312@</password>
         <admin>false</admin>
     </employee>
 </employees>
